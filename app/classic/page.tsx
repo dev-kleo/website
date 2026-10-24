@@ -1,20 +1,20 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { HeroKicker } from "./HeroKicker";
-import { HeroTitle } from "./HeroTitle";
-import { HomeShowcase } from "./HomeShowcase";
-import { LoadingIntro } from "./LoadingIntro";
-import { SiteFooter } from "./SiteFooter";
-import { SiteHeader } from "./SiteHeader";
-import { projectCards, researchCards } from "./home-cards";
-import { currentlyReading } from "./reading-data";
-import { experience, profile } from "./site-config";
+import { HeroKicker } from "../HeroKicker";
+import { HeroTitle } from "../HeroTitle";
+import { HomeShowcase } from "../HomeShowcase";
+import { LoadingIntro } from "../LoadingIntro";
+import { SiteFooter } from "../SiteFooter";
+import { SiteHeader } from "../SiteHeader";
+import { projectCards, researchCards } from "../home-cards";
+import { currentlyReading } from "../reading-data";
+import { experience, profile } from "../site-config";
 
 export const metadata: Metadata = {
   title: "Dey Intelligence — Abhishek Dey, AI Engineer",
   description: profile.description,
-  alternates: { canonical: "/" },
-  openGraph: { url: "/" },
+  alternates: { canonical: "/classic" },
+  openGraph: { url: "/classic" },
 };
 
 export default function Home() {

@@ -55,6 +55,18 @@
 .op-ru-grid p { max-width: 34rem; margin: 0 0 18px; color: var(--text-muted); font-size: 1.1rem; line-height: 1.55; }
 .op-ru-grid .button { margin-top: 10px; }
 
+/* Comparison table */
+.op-compare { overflow-x: auto; }
+.op-compare table { width: 100%; min-width: 36rem; border-collapse: collapse; }
+.op-compare th, .op-compare td { padding: 20px 16px 20px 0; border-top: 1.5px solid var(--text-primary); text-align: left; vertical-align: top; font-size: 1.05rem; line-height: 1.4; }
+.op-compare tbody tr:last-child > * { border-bottom: 1.5px solid var(--text-primary); }
+.op-compare thead th { padding-bottom: 14px; border-top: 0; color: var(--text-muted); font-family: var(--mono); font-size: 12px; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; }
+.op-compare tbody th { width: 30%; font-weight: 600; letter-spacing: -.02em; }
+.op-compare td { color: var(--text-muted); }
+.op-compare .op-us { color: var(--text-primary); font-weight: 600; }
+.op-compare thead .op-us { color: var(--text-primary); }
+.op-compare-note { margin: 16px 0 0; font-size: 11px; }
+
 /* FAQ */
 .op-faq { max-width: 56rem; margin: 0 auto; border-bottom: 1.5px solid var(--text-primary); }
 .op-faq details { border-top: 1.5px solid var(--text-primary); }
@@ -66,7 +78,7 @@
 
 /* Final call to action */
 .op-final { padding: clamp(72px, 10vw, 144px) 0 0; text-align: center; }
-.op-final h2 { max-width: 14ch; margin: 0 auto; font-size: clamp(2.8rem, 8vw, 7.5rem); line-height: .92; letter-spacing: -.055em; text-wrap: balance; }
+.op-final h2 { max-width: 18ch; margin: 0 auto; font-size: clamp(2.8rem, 8vw, 7.5rem); line-height: .92; letter-spacing: -.055em; text-wrap: balance; }
 .op-final > p { max-width: 30rem; margin: 28px auto 0; color: var(--text-muted); font-size: 1.15rem; line-height: 1.5; }
 
 @media (max-width: 800px) {

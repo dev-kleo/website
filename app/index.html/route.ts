@@ -1,4 +1,4 @@
-import { homeHtml } from "../home-3d";
+import { homeHtml } from "../home-premium";
 
 export const dynamic = "force-static";
 

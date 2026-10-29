@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "./redesign.css";
 import { profile } from "./site-config";
@@ -20,6 +20,8 @@ export const metadata: Metadata = {
     apple: "/images/dey-intelligence-mark.png",
   },
 };
+
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover" };
 
 export default function RootLayout({
   children,

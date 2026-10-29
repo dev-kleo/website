@@ -192,3 +192,65 @@ html[data-intro="play"] .ch { animation: chIn .9s cubic-bezier(.2, .7, .2, 1) ca
   .hdr, .rise, .ch, .wordmark-text, .egg-marquee > div { animation: none !important; }
   .tile, .flip-inner, .pill, .row { transition: none; }
 }
+/* ---------- Responsive hardening (mobile-first additions; desktop layout unchanged) ---------- */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+img, video, svg, canvas, iframe { max-width: 100%; }
+img, video { height: auto; }
+table { display: block; max-width: 100%; overflow-x: auto; }
+h1, h2, h3, p, li, a { overflow-wrap: break-word; }
+.site-shell { min-height: 100vh; min-height: 100dvh; }
+.site-header { padding-left: max(var(--gut), env(safe-area-inset-left)); padding-right: max(var(--gut), env(safe-area-inset-right)); padding-top: max(20px, env(safe-area-inset-top)); }
+.site-footer { padding-left: max(var(--gut), env(safe-area-inset-left)); padding-right: max(var(--gut), env(safe-area-inset-right)); padding-bottom: max(28px, env(safe-area-inset-bottom)); }
+.menu-overlay { min-height: 100dvh; padding-top: max(20px, env(safe-area-inset-top)); padding-bottom: max(40px, env(safe-area-inset-bottom)); padding-left: max(var(--gut), env(safe-area-inset-left)); padding-right: max(var(--gut), env(safe-area-inset-right)); }
+.egg { height: 100dvh; }
+.egg-top, .egg-body { padding-left: max(var(--gut), env(safe-area-inset-left)); padding-right: max(var(--gut), env(safe-area-inset-right)); }
+.toast { bottom: max(32px, calc(env(safe-area-inset-bottom) + 16px)); max-width: calc(100vw - 32px); white-space: normal; text-align: center; }
+input, select, textarea { max-width: 100%; font-size: 16px; }
+.menu-nav a { display: block; min-height: 44px; overflow-wrap: anywhere; }
+
+@media (max-width: 768px) {
+  .theme-toggle { width: 44px; height: 44px; }
+  .translator-button { min-height: 44px; min-width: 44px; }
+  .menu-button { min-height: 44px; }
+  .menu-circle { width: 44px; height: 44px; }
+  .closebtn { min-height: 44px; }
+  .hero-kicker { min-height: 44px; }
+  .button { min-height: 44px; }
+  .text-action, .back-link, .soft-button, .reading-back a { min-height: 44px; align-items: center; }
+  .back-link { display: inline-flex; margin-bottom: 1.5rem; }
+  .academic-link-button { min-height: 44px; }
+  .hero-actions, .project-actions { gap: .75rem; }
+  .contact-links, .footer-links, .hero-facts { gap: 0 1.25rem; }
+  .contact-links a, .footer-links a, .hero-facts a, .about-copy a, .article-byline a { display: inline-flex; align-items: center; min-height: 44px; }
+  .hero-facts > span { display: inline-flex; align-items: center; min-height: 44px; }
+  .article-references a { display: inline-block; padding-block: .6rem; }
+  .article-references ul { gap: 0; }
+  .site-footer a.producthunt { max-width: 100%; }
+  .status, .writing-entry-meta, .tag-list span, .fb-status, .fb-meta li, .op-available, .op-local-tags span { font-size: .75rem; }
+  .tile-top .mono, .pill, .translator-button { font-size: 12px; }
+  .detail { inset: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)); }
+  .detail-link { display: block; text-align: center; padding: 14px 18px; }
+  .detail-points li { padding-block: .1rem; }
+  .row { gap: 8px 24px; }
+  .row-title { overflow-wrap: anywhere; }
+  .op-receipt { animation: none; }
+  .egg-marquee > div { animation-duration: 40s; }
+}
+@media (max-width: 480px) {
+  .hero-actions .button, .project-actions .button, .detail-link { width: 100%; }
+  .footer-heading, .section-head h2, .hero-title { overflow-wrap: break-word; }
+  .tool-grid { grid-template-columns: 1fr; }
+  .toast { left: 16px; right: 16px; transform: none; animation-name: fadeIn; }
+}
+/* Touch devices: no sticky hover transforms */
+@media (hover: none) {
+  .card-tile:hover .tile { transform: none; }
+  .card-flip:hover .flip-inner { transform: none; }
+  .card-tile:hover .pill { opacity: 0; }
+  .card-grid:has(.card:hover) .card:not(:hover) .cap { color: inherit; }
+  .project-card:hover, .op-window:hover { transform: none; box-shadow: var(--shadow-sm); }
+  .button-primary:hover { transform: none; }
+  .row:hover { padding-left: 0; }
+  .menu-nav a:hover, .footer-funded:hover, .site-footer a:hover { color: inherit; }
+  .menu-nav a[aria-current="page"] { color: var(--orange); }
+}

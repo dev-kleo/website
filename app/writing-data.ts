@@ -81,6 +81,18 @@ export const academicPapers: AcademicPaper[] = [
     mark: "OSF",
   },
   {
+    title: "From Agent Labels to Accountable Deployment: Evidence Maturity and Meaningful Human Oversight for Agentic AI in Higher Education",
+    publicationType: "Preprint / Critical Integrative Review",
+    year: "2026",
+    description: "A review of whether current evidence supports giving agentic AI consequential roles in higher education, proposing the Autonomy-Oversight-Evidence framework: delegated autonomy should not exceed the maturity of the evidence or the strength of accountable human oversight.",
+    researchAreas: ["Agentic AI", "AI Governance", "Human Oversight", "Higher Education"],
+    // Research Square v1 (not peer reviewed); under review at Discover Education per the page's journal logo.
+    status: "Under review",
+    href: "https://www.researchsquare.com/article/rs-11020094/latest",
+    venue: "Research Square",
+    mark: "RS",
+  },
+  {
     title: "Evaluating Retrieval-Augmented Generation Assistants for Higher-Education Information Services: A Systematic Review of Metrics, Test Sets and Failure Modes",
     publicationType: "Preprint / Systematic Review",
     year: "2026",

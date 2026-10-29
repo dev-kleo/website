@@ -81,6 +81,17 @@ export const academicPapers: AcademicPaper[] = [
     mark: "OSF",
   },
   {
+    title: "Evaluating Retrieval-Augmented Generation Assistants for Higher-Education Information Services: A Systematic Review of Metrics, Test Sets and Failure Modes",
+    publicationType: "Preprint / Systematic Review",
+    year: "2026",
+    description: "A systematic review of 59 studies on retrieval-augmented generation assistants that answer university students' questions, examining the metrics, test sets and failure modes they report, and proposing a minimum reporting checklist.",
+    researchAreas: ["Retrieval-Augmented Generation", "Evaluation", "Higher Education", "Systematic Review"],
+    status: "Preprint",
+    href: "https://zenodo.org/records/23659588",
+    venue: "Zenodo",
+    mark: "ZEN",
+  },
+  {
     title: "Exchange-Rate Pass-Through and Food Inflation in Russia: Evidence from Monthly Data",
     publicationType: "Research Article",
     year: "2026",

@@ -59,7 +59,15 @@ export function SiteHeader({ active }: { active: string }) {
   const [menu, setMenu] = useState(false);
   const [egg, setEgg] = useState(false);
   const [logo, setLogo] = useState(0);
-  const closeMenu = useCallback(() => setMenu(false), []);
+  const [menuClosing, setMenuClosing] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const closeMenu = useCallback(() => {
+    setMenuClosing(true);
+    clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => { setMenu(false); setMenuClosing(false); }, 220);
+  }, []);
+  useEffect(() => () => clearTimeout(closeTimer.current), []);
+  const closeMenuNow = useCallback(() => { clearTimeout(closeTimer.current); setMenu(false); setMenuClosing(false); }, []);
   const closeEgg = useCallback(() => setEgg(false), []);
   const menuRef = useOverlay(menu, closeMenu);
   const eggRef = useOverlay(egg, closeEgg);
@@ -84,7 +92,7 @@ export function SiteHeader({ active }: { active: string }) {
         <div className="header-actions">
           <WebsiteTranslator compact />
           <ThemeToggle />
-          <button type="button" className="menu-button" aria-haspopup="dialog" aria-expanded={menu} onClick={() => setMenu(true)}>
+          <button type="button" className="menu-button" aria-haspopup="dialog" aria-controls="site-menu" aria-expanded={menu && !menuClosing} onClick={() => { clearTimeout(closeTimer.current); setMenuClosing(false); setMenu(true); }}>
             <span>Menu</span>
             <span className="menu-circle"><svg width="16" height="8" viewBox="0 0 16 8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true"><path d="M1 1h14M1 7h14" /></svg></span>
           </button>
@@ -92,11 +100,11 @@ export function SiteHeader({ active }: { active: string }) {
       </header>
 
       {menu && (
-        <div className="menu-overlay" role="dialog" aria-modal="true" aria-label="Site menu" ref={menuRef}>
+        <div id="site-menu" className={`menu-overlay${menuClosing ? " is-closing" : ""}`} role="dialog" aria-modal="true" aria-label="Site menu" ref={menuRef}>
           <div className="menu-top"><span className="menu-brand">Dey Intelligence</span><CloseButton onClick={closeMenu} light /></div>
           <nav className="menu-nav" aria-label="Primary">
             {MENU.map((item) => (
-              <Link key={item.key} href={item.href} onClick={closeMenu} aria-current={item.key === active ? "page" : undefined}>{item.label}</Link>
+              <Link key={item.key} href={item.href} onClick={closeMenuNow} aria-current={item.key === active ? "page" : undefined}>{item.label}</Link>
             ))}
           </nav>
         </div>

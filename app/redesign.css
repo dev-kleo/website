@@ -254,3 +254,11 @@ input, select, textarea { max-width: 100%; font-size: 16px; }
   .menu-nav a:hover, .footer-funded:hover, .site-footer a:hover { color: inherit; }
   .menu-nav a[aria-current="page"] { color: var(--orange); }
 }
+/* Mobile menu: short open/close (transform + opacity), no scroll chaining, safe centering on short screens */
+@keyframes menuIn { from { opacity: 0; transform: scale(.98); } to { opacity: 1; transform: scale(1); } }
+@keyframes menuOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(.98); } }
+.menu-overlay { overscroll-behavior: contain; animation: menuIn .22s var(--ease) both; }
+.menu-overlay.is-closing { animation: menuOut .22s var(--ease) both; pointer-events: none; }
+.menu-nav { justify-content: flex-start; }
+.menu-nav > a:first-child { margin-top: auto; }
+.menu-nav > a:last-child { margin-bottom: auto; }

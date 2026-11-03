@@ -115,7 +115,7 @@ optional build-time override and should be `https://deyintelligence.com` if set.
 ## Adding a publication
 
 Add an object to `publications` in `app/publications-data.ts` (fields are typed;
-see the placeholder entries, ids starting `placeholder-`). The `/publications`
+see the placeholder entries, ids starting `placeholder-`). The `/writing`
 filters, counts and JSON-LD are derived from that file. "Abhishek Dey" is bolded
 automatically. Tokens (colors, fonts, width) live at the top of
 `app/publications/publications.css`.

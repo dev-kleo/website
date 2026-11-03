@@ -49,7 +49,7 @@ export default function Home() {
 
       <section id="writing" className="next-pages" aria-label="More pages">
         <div className="mono section-bar"><span>S.04</span><span>Next pages</span></div>
-        <Link className="row" href="/writing"><span className="row-title">Writing &amp; Research</span><span className="mono muted">Notes, papers and drafts →</span></Link>
+        <Link className="row" href="/publications"><span className="row-title">Publications</span><span className="mono muted">Papers, preprints and working papers →</span></Link>
         <Link className="row" href="/reading"><span className="row-title">Reading shelf</span><span className="mono muted">{currentlyReading ? `Currently reading: ${currentlyReading.title} →` : "Books and notes →"}</span></Link>
       </section>
       <SiteFooter />

@@ -11,7 +11,7 @@ const MENU = [
   { href: "/#research", label: "Research", key: "research" },
   { href: "/#projects", label: "Projects", key: "projects" },
   { href: "/#experience", label: "Experience", key: "experience" },
-  { href: "/writing", label: "Writing & Research", key: "writing & research" },
+  { href: "/publications", label: "Publications", key: "publications" },
   { href: "/reading", label: "Reading", key: "reading" },
   { href: "/about", label: "About", key: "about" },
   { href: "/#contact", label: "Contact", key: "contact" },

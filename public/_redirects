@@ -1,2 +1,5 @@
 # Preserve the former server-side redirect for the article's old nested URL.
 /writing/south-ural-state-university-experience-review /south-ural-state-university-experience-review 308
+
+# Writing & Research index was replaced by Publications.
+/writing /publications 301

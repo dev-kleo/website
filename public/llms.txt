@@ -1,0 +1,18 @@
+# Price Tracker for Ozon, Wildberries & Yandex Market
+
+> A Chrome extension that saves product prices over time, shows price history as a chart, and flags when a target price is reached. Supports Ozon, Wildberries and Yandex Market. Price history is stored locally in the browser; no account is required. Built by Abhishek Dey (Dey Intelligence).
+
+## Pages
+
+- [Ozon Price Tracker (English)](https://deyintelligence.com/ozon-price-tracker): product overview, how it works, features, comparison with cloud trackers, FAQ
+- [Отслеживание цен на Ozon, Wildberries и Яндекс Маркете (Русский)](https://deyintelligence.com/ru/ozon-price-tracker): the same page in Russian
+- [Install from the Chrome Web Store](https://chromewebstore.google.com/detail/ozon-price-tracker/dodppojnnlcmbjeenenmpalmiikkmfkh)
+
+## Key facts
+
+- Supported stores: Ozon, Wildberries, Yandex Market
+- Browser: Google Chrome (Manifest V3 extension)
+- Features: price history chart, target-price alerts, folders, group charts, out-of-stock status, JSON backup (export and import)
+- Data: stored locally in the browser (IndexedDB); no account required
+- Developer: Abhishek Dey, https://deyintelligence.com
+- Contact: hello.deyabhishek@gmail.com

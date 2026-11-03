@@ -18,11 +18,11 @@ test("portfolio source contains project routes and no placeholder hrefs", async 
   assert.match(config, /siteUrl: process\.env\.NEXT_PUBLIC_SITE_URL \?\? "https:\/\/deyintelligence\.com"/);
   assert.match(config, /github: "https:\/\/github\.com\/Luffy-me"/);
 });
-test("publications section lives on the writing page", async () => {
-  const [writing, data] = await Promise.all([
-    readFile(new URL("app/writing/page.tsx", root), "utf8"),
+test("publications page uses the browser component", async () => {
+  const [page, data] = await Promise.all([
+    readFile(new URL("app/publications/page.tsx", root), "utf8"),
     readFile(new URL("app/publications-data.ts", root), "utf8"),
   ]);
-  assert.match(writing, /<PublicationsBrowser/);
+  assert.match(page, /<PublicationsBrowser/);
   assert.match(data, /placeholder-/);
 });

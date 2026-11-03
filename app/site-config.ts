@@ -47,7 +47,7 @@ export const experience = [
 
 export const navigationItems = [
   { href: "/projects", label: "Work" },
-  ...(hasWriting ? [{ href: "/writing", label: "Writing & Research" }] : []),
+  ...(hasWriting ? [{ href: "/publications", label: "Publications" }] : []),
   ...(hasReading ? [{ href: "/reading", label: "Reading" }] : []),
   { href: "/about", label: "About" },
   ...(profile.links.resume ? [{ href: profile.links.resume, label: "Resume" }] : []),

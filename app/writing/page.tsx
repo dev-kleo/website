@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { preload } from "react-dom";
 import { SiteFooter } from "../SiteFooter";
 import { SiteHeader } from "../SiteHeader";
+import { PublicationsBrowser } from "../publications/PublicationsBrowser";
+import "../publications/publications.css";
+import { publications } from "../publications-data";
 import { profile } from "../site-config";
 import { academicPapers, blogPosts } from "../writing-data";
 
@@ -20,7 +24,21 @@ function hasPublicLink(href: string) {
   return href.startsWith("https://") || href.startsWith("http://");
 }
 
+const publicationsSchema = {
+  "@context": "https://schema.org",
+  "@graph": publications.map((p) => ({
+    "@type": "ScholarlyArticle",
+    headline: p.title,
+    datePublished: String(p.year),
+    author: p.authors.map((name) => ({ "@type": "Person", name })),
+    isPartOf: { "@type": "Periodical", name: p.venue },
+    keywords: [...p.applications, ...p.domains, ...p.methods].join(", "),
+    ...(p.venueUrl ? { url: p.venueUrl } : {}),
+  })),
+};
+
 export default function WritingPage() {
+  preload("/fonts/source-serif-4-latin-wght.woff2", { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
   const papersSchema = academicPapers.length > 0 ? { "@context": "https://schema.org", "@graph": academicPapers.map((paper) => ({ "@type": "ScholarlyArticle", headline: paper.title, description: paper.description, datePublished: paper.year, genre: paper.publicationType, keywords: paper.researchAreas.join(", "), author: { "@id": `${profile.siteUrl}/about#person`, "@type": "Person", name: profile.name }, ...(hasPublicLink(paper.href) ? { url: paper.href } : {}) })) } : undefined;
   return <div className="site-shell"><a className="skip-link" href="#main-content">Skip to content</a><SiteHeader active="writing & research" />
     <main className="page-content" id="main-content">{papersSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(papersSchema) }} />}
@@ -45,6 +63,11 @@ export default function WritingPage() {
             </div>
           </article>;
         })}</div> : <p className="writing-empty">Your public papers and academic reviews will appear here. Add each item in <code>app/writing-data.ts</code> with its public link.</p>}
+      </section>
+      <section className="pub" aria-labelledby="publications-heading">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(publicationsSchema).replace(/</g, "\u003c") }} />
+        <header className="pub-hero"><p className="eyebrow">Research output</p><h2 id="publications-heading">Publications</h2><p>Economics, international business, and AI and data science.</p></header>
+        <PublicationsBrowser />
       </section>
       <SiteFooter />
     </main>

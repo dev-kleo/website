@@ -9,3 +9,7 @@ font service at runtime.
 Both families are distributed under the SIL Open Font License 1.1. The files come
 from the Fontsource packages `@fontsource-variable/hanken-grotesk` and
 `@fontsource/dm-mono`, which include the license records.
+- `source-serif-4-latin-wght.woff2`: Source Serif 4 (variable weight, Latin subset) by Adobe, used on `/publications`
+- `ibm-plex-sans-400-normal.woff2`, `-600-normal`, `-400-italic`: IBM Plex Sans (Latin subset) by IBM, used on `/publications`
+
+Both are SIL OFL 1.1, from `@fontsource-variable/source-serif-4` and `@fontsource/ibm-plex-sans`.

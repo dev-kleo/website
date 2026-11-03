@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "app/publications/publications.css"
+        ],
+        "createdAt": "2026-11-03T14:26:18.814Z",
+        "reason": "specified in original design brief: 3px accent bar on filter cards"
+      }
+    ]
+  }
+}

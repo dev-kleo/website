@@ -18,3 +18,13 @@ test("portfolio source contains project routes and no placeholder hrefs", async 
   assert.match(config, /siteUrl: process\.env\.NEXT_PUBLIC_SITE_URL \?\? "https:\/\/deyintelligence\.com"/);
   assert.match(config, /github: "https:\/\/github\.com\/Luffy-me"/);
 });
+test("publications page is routed, listed in nav and sitemap", async () => {
+  const [header, sitemap, data] = await Promise.all([
+    readFile(new URL("app/SiteHeader.tsx", root), "utf8"),
+    readFile(new URL("app/sitemap.ts", root), "utf8"),
+    readFile(new URL("app/publications-data.ts", root), "utf8"),
+  ]);
+  assert.match(header, /href: "\/publications"/);
+  assert.match(sitemap, /"\/publications"/);
+  assert.match(data, /placeholder-/);
+});

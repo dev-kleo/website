@@ -85,10 +85,10 @@ export function PublicationsBrowser() {
               {p.domains.map((t) => <span className="pub-tag t-dom" key={t}>{t}</span>)}
               {p.methods.map((t) => <span className="pub-tag t-meth" key={t}>{t}</span>)}
             </p>}
-            <p className="pub-links">
-              {(Object.keys(LINK_LABELS) as (keyof typeof LINK_LABELS)[]).map((k) => p.links?.[k] && <a key={k} href={p.links[k]}>{LINK_LABELS[k]}</a>)}
+            {(p.bibtex || Object.values(p.links ?? {}).some(Boolean)) && <p className="pub-links">
+              {(Object.keys(LINK_LABELS) as (keyof typeof LINK_LABELS)[]).map((k) => p.links?.[k] && <a key={k} href={p.links[k]} target="_blank" rel="noopener">{LINK_LABELS[k]}</a>)}
               {p.bibtex && <button type="button" className="pub-link" onClick={() => cite(p)}>{cited === p.id ? "Copied" : "Cite"}</button>}
-            </p>
+            </p>}
           </li>
         ))}
       </ol>

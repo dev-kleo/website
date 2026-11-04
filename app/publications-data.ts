@@ -1,7 +1,7 @@
 // Add papers here. Filter options, counts and JSON-LD are derived from this array.
 // Real data only: tests/rendered-html.test.mjs fails on empty, example.com or bare-homepage URLs.
 export type Status = "Preprint" | "Under review" | "In preparation" | "Published";
-export const LINK_LABELS = { paper: "Paper", pdf: "PDF", ssrn: "SSRN", arxiv: "arXiv", doi: "DOI", code: "Code", slides: "Slides" } as const;
+export const LINK_LABELS = { ssrn: "SSRN", researchsquare: "Research Square", doi: "DOI", arxiv: "arXiv", paper: "View paper", pdf: "PDF", code: "Code", slides: "Slides" } as const;
 
 export type Publication = {
   id: string;
@@ -34,7 +34,7 @@ export type Publication = {
   methods: [],
   abstract: "",
   bibtex: "",
-  links: { paper: "", pdf: "", ssrn: "", arxiv: "", doi: "", code: "", slides: "" },
+  links: { ssrn: "", researchsquare: "", doi: "", arxiv: "", paper: "", pdf: "", code: "", slides: "" },
 },
 */
 export const publications: Publication[] = [
@@ -73,7 +73,7 @@ export const publications: Publication[] = [
     applications: ["Education & AI"],
     domains: ["AI & Data Science"],
     methods: ["Critical integrative review"],
-    // TODO: add links.paper once the Research Square URL is confirmed.
+    // TODO: add links.researchsquare once the Research Square URL is confirmed.
   },
   {
     id: "beyond-the-agent-label",

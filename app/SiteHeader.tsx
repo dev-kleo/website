@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { BrandMark } from "./BrandMark";
 import { ThemeToggle } from "./ThemeToggle";
 import { WebsiteTranslator } from "./WebsiteTranslator";
 
@@ -85,9 +86,9 @@ export function SiteHeader({ active }: { active: string }) {
     <>
       <header className="site-header hdr">
         {home ? (
-          <button type="button" className="wordmark" onClick={onLogo} aria-label="Dey Intelligence">{wordmark}</button>
+          <button type="button" className="wordmark" onClick={onLogo} aria-label="Dey Intelligence"><BrandMark />{wordmark}</button>
         ) : (
-          <Link className="wordmark" href="/" aria-label="Dey Intelligence, home"><span className="wordmark-text">Dey Intelligence</span></Link>
+          <Link className="wordmark" href="/" aria-label="Dey Intelligence, home"><BrandMark /><span className="wordmark-text">Dey Intelligence</span></Link>
         )}
         <div className="header-actions">
           <WebsiteTranslator compact />
@@ -101,7 +102,7 @@ export function SiteHeader({ active }: { active: string }) {
 
       {menu && (
         <div id="site-menu" className={`menu-overlay${menuClosing ? " is-closing" : ""}`} role="dialog" aria-modal="true" aria-label="Site menu" ref={menuRef}>
-          <div className="menu-top"><span className="menu-brand">Dey Intelligence</span><CloseButton onClick={closeMenu} light /></div>
+          <div className="menu-top"><span className="menu-brand"><BrandMark dark />Dey Intelligence</span><CloseButton onClick={closeMenu} light /></div>
           <nav className="menu-nav" aria-label="Primary">
             {MENU.map((item) => (
               <Link key={item.key} href={item.href} onClick={closeMenuNow} aria-current={item.key === active ? "page" : undefined}>{item.label}</Link>

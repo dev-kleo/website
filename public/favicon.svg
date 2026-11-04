@@ -1,6 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <title>Dey Intelligence</title>
-  <path fill="#2b2927" d="M251 69c118 0 214 84 214 187s-96 187-214 187c87-18 151-94 151-187S338 87 251 69Z"/>
-  <path fill="#2b2927" d="M42 246c91-7 155-66 170-144-3 76-40 128-92 144H42Z"/>
-  <path fill="#f07b4f" d="M231 3c7 139 42 213 151 243-109 17-143 70-151 263-8-193-42-246-151-263C189 216 224 142 231 3Z"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><style>.i{fill:#141413}.a{fill:#2547d0}@media (prefers-color-scheme:dark){.i{fill:#f4f3ef}.a{fill:#8da2ff}}</style><path class="i" fill-rule="evenodd" d="M12 10 H28 A22 22 0 0 1 28 54 H12 Z M23 20 H28 A12 12 0 0 1 28 44 H23 Z"/><circle class="a" cx="53" cy="11" r="6.5"/></svg>

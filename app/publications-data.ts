@@ -11,7 +11,7 @@ export type Publication = {
   venue?: string; // journal, series or repository; leave out for preprints without one
   venueUrl?: string;
   status: Status;
-  statusNote?: string; // e.g. the journal a submission is under review at
+  statusNote?: string; // journal a submission is under review at; shown on the venue line
   applications: string[];
   domains: string[];
   methods: string[];
@@ -45,9 +45,9 @@ export const publications: Publication[] = [
     authors: ["Abhishek Dey"],
     venue: "SSRN",
     status: "Preprint",
-    applications: [],
-    domains: [],
-    methods: [],
+    applications: ["Digital knowledge commons"],
+    domains: ["AI & Data Science"],
+    methods: [], // TODO: method not stated in the abstract
     // TODO: add links.ssrn once the public SSRN URL is confirmed.
   },
   {
@@ -57,9 +57,9 @@ export const publications: Publication[] = [
     authors: ["Abhishek Dey"],
     venue: "Zenodo and OSF Preprints",
     status: "Preprint",
-    applications: [],
-    domains: [],
-    methods: [],
+    applications: ["Education & AI"],
+    domains: ["AI & Data Science"],
+    methods: ["Systematic review"],
     links: { doi: "https://doi.org/10.5281/zenodo.23659256" },
   },
   {
@@ -70,9 +70,9 @@ export const publications: Publication[] = [
     venue: "Research Square",
     status: "Under review",
     statusNote: "Discover Education",
-    applications: [],
-    domains: [],
-    methods: [],
+    applications: ["Education & AI"],
+    domains: ["AI & Data Science"],
+    methods: ["Critical integrative review"],
     // TODO: add links.paper once the Research Square URL is confirmed.
   },
   {
@@ -82,9 +82,9 @@ export const publications: Publication[] = [
     authors: ["Abhishek Dey"],
     venue: "OSF Preprints",
     status: "Preprint",
-    applications: [],
-    domains: [],
-    methods: [],
+    applications: ["Education & AI"],
+    domains: ["AI & Data Science"],
+    methods: ["Critical integrative review"],
     links: { doi: "https://doi.org/10.35542/osf.io/va5pz_v1" },
   },
   {
@@ -94,8 +94,8 @@ export const publications: Publication[] = [
     authors: ["Abhishek Dey"],
     status: "Under review",
     statusNote: "Post-Communist Economies",
-    applications: [],
-    domains: [],
-    methods: [],
+    applications: ["Macroeconomics & inflation"],
+    domains: ["Economics"],
+    methods: [], // TODO: method not stated in the abstract
   },
 ];

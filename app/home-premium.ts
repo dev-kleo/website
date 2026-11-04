@@ -105,7 +105,31 @@ section.cv{background:#F5F4ED}
 .foot nav{display:flex;flex-wrap:wrap;gap:24px}
 .foot a{color:#C9C7BC}
 .foot a:hover{color:#fff}
-a:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:4px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:4px}
+.burger-btn{display:none;width:44px;height:44px;align-items:center;justify-content:center;flex:none;padding:0;border:1px solid var(--line);border-radius:50%;background:none;color:var(--ink);cursor:pointer}
+.burger{position:relative;display:block;width:16px;height:8px}
+.burger i{position:absolute;left:0;width:100%;height:1.5px;border-radius:1px;background:currentColor;transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.burger i+i{top:6.5px}
+.m-ov.open .burger i:first-child{transform:translateY(3.25px) rotate(45deg)}
+.m-ov.open .burger i+i{transform:translateY(-3.25px) rotate(-45deg)}
+.m-ov{position:fixed;inset:0;z-index:50;display:none;flex-direction:column;min-height:100dvh;padding:max(20px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));overflow:auto;overscroll-behavior:contain;background:rgb(250 249 245/.94);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);visibility:hidden;opacity:0;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility 0s .2s}
+.m-ov.open{visibility:visible;opacity:1;transform:none;transition:opacity .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1),visibility 0s}
+.m-top{display:flex;align-items:center;justify-content:space-between}
+.m-nav{display:flex;flex:1 0 auto;flex-direction:column;padding:24px 0}
+.m-nav a{display:flex;align-items:baseline;gap:18px;min-height:56px;padding:10px 0;border-top:1px solid var(--line);font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:clamp(34px,10vw,46px);line-height:1.1;letter-spacing:-.02em}
+.m-nav a:last-child{border-bottom:1px solid var(--line)}
+.m-nav .i{min-width:2.4ch;font:500 11px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.08em;color:var(--muted)}
+.m-nav a[aria-current]{color:var(--clay)}
+.m-contact{display:flex;flex-wrap:wrap;gap:0 20px;font-size:14px;color:var(--muted)}
+.m-contact a{display:inline-flex;align-items:center;min-height:44px;overflow-wrap:anywhere}
+.m-cta{display:flex;align-items:center;justify-content:center;min-height:52px;margin-top:8px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:16px;font-weight:500}
+.m-nav a,.m-foot{opacity:0;transform:translateY(14px);transition:opacity .2s,transform .2s}
+.m-ov.open .m-nav a,.m-ov.open .m-foot{opacity:1;transform:none;transition:opacity .4s cubic-bezier(.22,1,.36,1) calc(80ms + var(--i,0)*50ms),transform .4s cubic-bezier(.22,1,.36,1) calc(80ms + var(--i,0)*50ms)}
+@media (max-width:768px){nav.main{display:none}.burger-btn{display:inline-flex}.m-ov{display:flex}header.top .wrap{flex-wrap:nowrap}.brand{min-width:0}}
+@media (max-width:768px) and (max-height:640px){.m-nav a{min-height:48px;padding:6px 0;font-size:30px}}
+@media (prefers-reduced-motion:reduce){
+.m-ov,.m-nav a,.m-foot,.burger i{transition:none!important}
+}
 @media (prefers-reduced-motion:reduce){
 html{scroll-behavior:auto}
 .grid-bg,.dot,.caret{animation:none!important}
@@ -155,6 +179,26 @@ const navLinks = [
   `<a class="nav-link" href="#contact">Contact</a>`,
 ].join("");
 
+const menuItems = [...navigationItems, { href: "#contact", label: "Contact" }];
+const menuLinks = menuItems
+  .map((item, i) => `<a href="${esc(item.href)}" style="--i:${i}"><span class="i" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span>${esc(item.label)}</a>`)
+  .join("");
+const burger = `<span class="burger" aria-hidden="true"><i></i><i></i></span>`;
+const menuHtml = `<div class="m-ov" id="site-menu" role="dialog" aria-modal="true" aria-label="Site menu">
+<div class="m-top"><a class="brand" href="/"><img src="/mark.svg" alt="" width="28" height="28">${esc(profile.brand)}</a><button type="button" class="burger-btn m-close" aria-label="Close menu" aria-expanded="true" aria-controls="site-menu">${burger}</button></div>
+<nav class="m-nav" aria-label="Primary">${menuLinks}</nav>
+<div class="m-foot" style="--i:${menuItems.length}"><div class="m-contact"><a href="mailto:${esc(profile.links.email)}">${esc(profile.links.email)}</a><a href="${esc(profile.links.github)}" target="_blank" rel="noopener noreferrer">GitHub</a><a href="${esc(profile.links.linkedin)}" target="_blank" rel="noopener noreferrer">LinkedIn</a></div><a class="m-cta" href="mailto:${esc(profile.links.email)}">Get in touch</a></div>
+</div>`;
+const menuScript = `(function(){var b=document.getElementById('menu-btn'),o=document.getElementById('site-menu');if(!b||!o)return;var x=o.querySelector('.m-close'),s=document.body.style,y=0,v=false;
+function nodes(){return Array.prototype.filter.call(o.querySelectorAll('a[href],button'),function(n){return n.getClientRects().length})}
+function set(on,back){if(on===v)return;v=on;if(on){y=window.scrollY;s.position='fixed';s.top=-y+'px';s.width='100%';o.classList.add('open');b.setAttribute('aria-expanded','true');x.focus({preventScroll:true})}else{o.classList.remove('open');b.setAttribute('aria-expanded','false');s.position=s.top=s.width='';window.scrollTo({top:y,behavior:'instant'});if(back)b.focus({preventScroll:true})}}
+b.addEventListener('click',function(){set(true)});
+x.addEventListener('click',function(){set(false,true)});
+o.addEventListener('click',function(e){var a=e.target.closest('a');if(a)set(false);else if(!e.target.closest('button'))set(false,true)});
+document.addEventListener('keydown',function(e){if(!v)return;if(e.key==='Escape'){e.preventDefault();set(false,true);return}if(e.key!=='Tab')return;var n=nodes(),f=n[0],l=n[n.length-1];if(e.shiftKey&&document.activeElement===f){e.preventDefault();l.focus()}else if(!e.shiftKey&&document.activeElement===l){e.preventDefault();f.focus()}});
+window.matchMedia('(min-width:769px)').addEventListener('change',function(e){if(e.matches)set(false)});
+})();`;
+
 export const homeHtml = `<!doctype html>
 <html lang="en">
 <head>
@@ -173,7 +217,8 @@ export const homeHtml = `<!doctype html>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="top"><div class="wrap"><a class="brand" href="/"><img src="/mark.svg" alt="" width="28" height="28">${esc(profile.brand)}</a><nav class="main" aria-label="Main">${navLinks}</nav></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="/"><img src="/mark.svg" alt="" width="28" height="28">${esc(profile.brand)}</a><nav class="main" aria-label="Main">${navLinks}</nav><button type="button" class="burger-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">${burger}</button></div></header>
+${menuHtml}
 <main id="main">
 
 <section class="hero" id="top">
@@ -234,6 +279,7 @@ ${experienceRows}
 </div></section>
 
 </main>
+<script>${menuScript}</script>
 </body>
 </html>
 `;

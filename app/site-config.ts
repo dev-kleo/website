@@ -11,8 +11,7 @@ export const profile = {
     email: "hello.deyabhishek@gmail.com",
     phone: "+79128083769",
     orcid: "https://orcid.org/0009-0007-4913-7090",
-    // TODO: set the Google Scholar profile URL; the footer and Publications empty state show it once set.
-    scholar: undefined as string | undefined,
+    scholar: "https://scholar.google.com/citations?hl=ru&user=Pfq6JasAAAAJ" as string | undefined,
     resume: undefined,
   },
 } as const;

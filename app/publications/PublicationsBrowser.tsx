@@ -20,7 +20,7 @@ const OPTIONS: Record<Key, string[]> = { applications: unique("applications"), d
 // OR within a group, AND across groups; `skip` leaves one group out so its own counts ignore its selection.
 function matches(p: Publication, sel: Sel, q: string, skip?: Key) {
   if (!KEYS.every((k) => k === skip || !sel[k].length || sel[k].some((v) => p[k].includes(v)))) return false;
-  return !q || [p.title, ...p.authors, p.venue ?? "", p.status, ...p.applications, ...p.domains, ...p.methods].join(" ").toLowerCase().includes(q);
+  return !q || [p.title, ...p.authors, p.venue ?? "", p.status, p.statusNote ?? "", ...p.applications, ...p.domains, ...p.methods].join(" ").toLowerCase().includes(q);
 }
 
 function Authors({ names }: { names: string[] }) {
@@ -80,13 +80,13 @@ export function PublicationsBrowser() {
           <li key={p.id} className="pub-item">
             <h4>{p.title}</h4>
             <Authors names={p.authors} />
-            <p className="pub-meta"><span className="pub-badge">{p.status}</span>{p.venue && <span className="pub-venue">{p.venueUrl ? <a href={p.venueUrl}>{p.venue}</a> : p.venue}</span>}</p>
+            <p className="pub-meta"><span className="pub-badge">{p.statusNote ? `${p.status} (${p.statusNote})` : p.status}</span>{p.venue && <span className="pub-venue">{p.venueUrl ? <a href={p.venueUrl}>{p.venue}</a> : p.venue}</span>}</p>
             {p.abstract && <p className="pub-abstract">{p.abstract}</p>}
-            <p className="pub-tags">
+            {(p.applications.length + p.domains.length + p.methods.length > 0) && <p className="pub-tags">
               {p.applications.map((t) => <span className="pub-tag t-app" key={t}>{t}</span>)}
               {p.domains.map((t) => <span className="pub-tag t-dom" key={t}>{t}</span>)}
               {p.methods.map((t) => <span className="pub-tag t-meth" key={t}>{t}</span>)}
-            </p>
+            </p>}
             <p className="pub-links">
               {(Object.keys(LINK_LABELS) as (keyof typeof LINK_LABELS)[]).map((k) => p.links?.[k] && <a key={k} href={p.links[k]}>{LINK_LABELS[k]}</a>)}
               {p.bibtex && <button type="button" className="pub-link" onClick={() => cite(p)}>{cited === p.id ? "Copied" : "Cite"}</button>}

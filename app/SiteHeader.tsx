@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { BrandMark } from "./BrandMark";
+import { profile } from "./site-config";
 import { ThemeToggle } from "./ThemeToggle";
 import { WebsiteTranslator } from "./WebsiteTranslator";
 
@@ -24,13 +25,14 @@ function useOverlay(open: boolean, onClose: () => void) {
     if (!open) return;
     const root = ref.current;
     const returnTo = document.activeElement as HTMLElement | null;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    // Fixed body + saved offset locks scroll on iOS too; restored on close so the page does not jump.
+    const y = window.scrollY, body = document.body.style, saved = [body.position, body.top, body.width];
+    body.position = "fixed"; body.top = `${-y}px`; body.width = "100%";
     root?.querySelector<HTMLElement>("[data-close]")?.focus();
     function onKey(event: KeyboardEvent) {
       if (event.key === "Escape") { event.preventDefault(); onClose(); return; }
       if (event.key !== "Tab" || !root) return;
-      const nodes = Array.from(root.querySelectorAll<HTMLElement>("a[href],button"));
+      const nodes = Array.from(root.querySelectorAll<HTMLElement>("a[href],button")).filter((n) => n.getClientRects().length);
       if (!nodes.length) return;
       const first = nodes[0], last = nodes[nodes.length - 1];
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
@@ -39,18 +41,24 @@ function useOverlay(open: boolean, onClose: () => void) {
     document.addEventListener("keydown", onKey);
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
-      returnTo?.focus();
+      [body.position, body.top, body.width] = saved;
+      window.scrollTo({ top: y, behavior: "instant" });
+      returnTo?.focus({ preventScroll: true });
     };
   }, [open, onClose]);
   return ref;
 }
 
-function CloseButton({ onClick, light }: { onClick: () => void; light?: boolean }) {
+// Two thin lines; `x` morphs them into a cross (CSS, transform only).
+function Burger({ x }: { x?: boolean }) {
+  return <span className={`burger${x ? " is-x" : ""}`} aria-hidden="true"><i /><i /></span>;
+}
+
+function CloseButton({ onClick, light, controls }: { onClick: () => void; light?: boolean; controls?: string }) {
   return (
-    <button type="button" className={`closebtn${light ? " closebtn-dark" : ""}`} data-close onClick={onClick}>
-      <span className="mono">Close</span>
-      <span className="closebtn-x"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" /></svg></span>
+    <button type="button" className={`closebtn${light ? " closebtn-dark" : ""}`} data-close onClick={onClick} aria-label={controls ? "Close menu" : "Close"} aria-expanded={controls ? true : undefined} aria-controls={controls}>
+      <span className="mono" aria-hidden="true">Close</span>
+      <span className="closebtn-x"><Burger x /></span>
     </button>
   );
 }
@@ -93,21 +101,31 @@ export function SiteHeader({ active }: { active: string }) {
         <div className="header-actions">
           <WebsiteTranslator compact />
           <ThemeToggle />
-          <button type="button" className="menu-button" aria-haspopup="dialog" aria-controls="site-menu" aria-expanded={menu && !menuClosing} onClick={() => { clearTimeout(closeTimer.current); setMenuClosing(false); setMenu(true); }}>
-            <span>Menu</span>
-            <span className="menu-circle"><svg width="16" height="8" viewBox="0 0 16 8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true"><path d="M1 1h14M1 7h14" /></svg></span>
+          <button type="button" className="menu-button" aria-label="Open menu" aria-haspopup="dialog" aria-controls="site-menu" aria-expanded={menu && !menuClosing} onClick={() => { clearTimeout(closeTimer.current); setMenuClosing(false); setMenu(true); }}>
+            <span aria-hidden="true">Menu</span>
+            <span className="menu-circle"><Burger /></span>
           </button>
         </div>
       </header>
 
       {menu && (
-        <div id="site-menu" className={`menu-overlay${menuClosing ? " is-closing" : ""}`} role="dialog" aria-modal="true" aria-label="Site menu" ref={menuRef}>
-          <div className="menu-top"><span className="menu-brand"><BrandMark dark />Dey Intelligence</span><CloseButton onClick={closeMenu} light /></div>
+        <div id="site-menu" className={`menu-overlay${menuClosing ? " is-closing" : ""}`} role="dialog" aria-modal="true" aria-label="Site menu" ref={menuRef} onClick={(e) => { if (!(e.target as HTMLElement).closest("a,button")) closeMenu(); }}>
+          <div className="menu-top"><span className="menu-brand"><BrandMark dark />Dey Intelligence</span><CloseButton onClick={closeMenu} light controls="site-menu" /></div>
           <nav className="menu-nav" aria-label="Primary">
-            {MENU.map((item) => (
-              <Link key={item.key} href={item.href} onClick={closeMenuNow} aria-current={item.key === active ? "page" : undefined}>{item.label}</Link>
+            {MENU.map((item, i) => (
+              <Link key={item.key} href={item.href} onClick={closeMenuNow} aria-current={item.key === active ? "page" : undefined} style={{ "--i": i } as React.CSSProperties}>
+                <span className="menu-idx mono" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span><span className="menu-label">{item.label}</span>
+              </Link>
             ))}
           </nav>
+          <div className="menu-foot">
+            <div className="menu-contact">
+              <a href={`mailto:${profile.links.email}`} onClick={closeMenuNow}>{profile.links.email}</a>
+              <a href={profile.links.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+            <a className="menu-cta" href={`mailto:${profile.links.email}`} onClick={closeMenuNow}>Get in touch</a>
+          </div>
         </div>
       )}
 

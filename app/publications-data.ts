@@ -48,7 +48,7 @@ export const publications: Publication[] = [
     applications: ["Digital knowledge commons"],
     domains: ["AI & Data Science"],
     methods: [], // TODO: method not stated in the abstract
-    // TODO: add links.ssrn once the public SSRN URL is confirmed.
+    links: { ssrn: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7555720" },
   },
   {
     id: "rag-assistants-higher-education",

@@ -151,7 +151,6 @@ const experienceRows = experience
   .join("\n");
 
 const navLinks = [
-  `<a class="nav-link" href="#research">Research</a>`,
   ...navigationItems.map((item) => `<a class="nav-link" href="${esc(item.href)}">${esc(item.label)}</a>`),
   `<a class="nav-link" href="#contact">Contact</a>`,
 ].join("");

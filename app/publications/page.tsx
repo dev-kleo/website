@@ -3,16 +3,20 @@ import { preload } from "react-dom";
 import { SiteFooter } from "../SiteFooter";
 import { SiteHeader } from "../SiteHeader";
 import { publications } from "../publications-data";
+import { profile } from "../site-config";
 import { PublicationsBrowser } from "./PublicationsBrowser";
 import "./publications.css";
 
-const description = "Research by Abhishek Dey across economics, international business, and AI and data science. Filter by application, domain and method.";
+const title = "Publications — Dey Intelligence";
+const description = "Research by Abhishek Dey in economics, international business, and AI and data science. Preprints, working papers and publications. Open to doctoral opportunities.";
+const image = { url: "/og-v2.png", width: 1731, height: 909, alt: "Dey Intelligence — Abhishek Dey" };
 
 export const metadata: Metadata = {
-  title: "Publications — Dey Intelligence",
+  title,
   description,
   alternates: { canonical: "/publications" },
-  openGraph: { url: "/publications", title: "Publications — Dey Intelligence", description },
+  openGraph: { type: "website", url: "/publications", siteName: profile.brand, title, description, images: [image] },
+  twitter: { card: "summary_large_image", title, description, images: [image.url] },
 };
 
 const jsonLd = {
@@ -22,9 +26,9 @@ const jsonLd = {
     headline: p.title,
     datePublished: String(p.year),
     author: p.authors.map((name) => ({ "@type": "Person", name })),
-    isPartOf: { "@type": "Periodical", name: p.venue },
+    ...(p.venue ? { isPartOf: { "@type": "Periodical", name: p.venue } } : {}),
     keywords: [...p.applications, ...p.domains, ...p.methods].join(", "),
-    ...(p.venueUrl ? { url: p.venueUrl } : {}),
+    ...(p.links?.paper ?? p.venueUrl ? { url: p.links?.paper ?? p.venueUrl } : {}),
   })),
 };
 
@@ -33,11 +37,11 @@ export default function PublicationsPage() {
   return <div className="site-shell"><a className="skip-link" href="#main-content">Skip to content</a><SiteHeader active="publications" />
     <main className="page-content" id="main-content">
       <div className="pub">
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\u003c") }} />
+        {publications.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\u003c") }} />}
         <header className="pub-hero"><h1>Publications</h1><p>Economics, international business, and AI and data science.</p></header>
         <PublicationsBrowser />
       </div>
-      <SiteFooter />
+      <SiteFooter compact />
     </main>
   </div>;
 }

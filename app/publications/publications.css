@@ -72,9 +72,13 @@
 .pub-item p { margin: .25rem 0 0; }
 .pub-authors { color: var(--pub-muted); font-size: .8125rem; }
 .pub-authors strong { color: var(--pub-ink); }
+.pub-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .6rem; }
 .pub-venue { font-style: italic; overflow-wrap: anywhere; }
 .pub-venue a { color: inherit; }
-.pub-badge { display: inline-block; margin-left: .5rem; padding: .05rem .45rem; font-size: .6875rem; font-style: normal; color: var(--pub-muted); border: 1px solid var(--pub-line); border-radius: 999px; vertical-align: .08em; }
+.pub-badge { padding: .05rem .45rem; font-size: .6875rem; color: var(--pub-muted); border: 1px solid var(--pub-line); border-radius: 999px; }
+.pub-abstract { color: var(--pub-muted); font-size: .875rem; }
+.pub-soon { max-width: 36rem; margin: 0 auto; padding: 2rem 0 4rem; }
+.pub-soon .pub-links { justify-content: center; }
 .pub-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .5rem !important; }
 .pub-tag { padding: .1rem .55rem; font-size: .75rem; border-radius: 999px; }
 .t-app { color: var(--pub-app); background: var(--pub-app-tint); }

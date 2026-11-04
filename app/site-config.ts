@@ -6,11 +6,13 @@ export const profile = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://deyintelligence.com",
   currentFocusUpdated: "September 1, 2026",
   links: {
-    github: "https://github.com/Luffy-me",
+    github: "https://github.com/dev-kleo",
     linkedin: "https://www.linkedin.com/in/abhishekdeyint",
     email: "hello.deyabhishek@gmail.com",
     phone: "+79128083769",
     orcid: "https://orcid.org/0009-0007-4913-7090",
+    // TODO: set the Google Scholar profile URL; the footer and Publications empty state show it once set.
+    scholar: undefined as string | undefined,
     resume: undefined,
   },
 } as const;

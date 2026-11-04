@@ -1,7 +1,8 @@
 import { FundingHeading } from "./FundingHeading";
 import { profile } from "./site-config";
 
-export function SiteFooter() {
+// compact drops the app-promo extras (Flappy Bird privacy links, Product Hunt badge) for focused pages.
+export function SiteFooter({ compact = false }: { compact?: boolean }) {
   return (
     <footer className="site-footer" id="contact">
       <div className="mono dim">Contact</div>
@@ -9,9 +10,11 @@ export function SiteFooter() {
       <div className="mono footer-links">
         <a href={`mailto:${profile.links.email}`}>{profile.links.email}</a>
         <a href={profile.links.orcid}>ORCID</a>
+        {profile.links.scholar && <a href={profile.links.scholar}>Google Scholar</a>}
         <a href={profile.links.github}>GitHub</a>
         <a href={profile.links.linkedin}>LinkedIn</a>
       </div>
+      {!compact && <>
       <div className="mono footer-links">
         <a href="/flappy-bird/privacy">Flappy Bird privacy policy</a>
         <a href="/flappy-bird/privacy/ru" hrefLang="ru" lang="ru">Политика конфиденциальности</a>
@@ -31,6 +34,7 @@ export function SiteFooter() {
           src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1263212&amp;theme=dark&amp;t=1790600113553"
         />
       </a>
+      </>}
       <div className="mono footer-base"><span>© 2026 {profile.name}</span><span>{profile.brand} · Research &amp; product studio</span></div>
     </footer>
   );

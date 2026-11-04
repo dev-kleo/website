@@ -30,7 +30,7 @@ h1,h2,h3,p{margin:0}
 .skip:focus{left:16px;top:16px;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;z-index:10}
 header.top{border-bottom:1px solid var(--line)}
 header.top .wrap{padding-top:20px;padding-bottom:20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
-.brand{font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:500;letter-spacing:-.01em}
+.brand{display:inline-flex;align-items:center;gap:10px;font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:500;letter-spacing:-.01em}
 nav.main{display:flex;flex-wrap:wrap;gap:28px;font-size:14px}
 .nav-link{color:var(--muted);transition:color .2s}
 .nav-link:hover{color:var(--ink)}
@@ -165,7 +165,7 @@ export const homeHtml = `<!doctype html>
 <meta name="description" content="${esc(profile.description)}">
 <meta name="theme-color" content="#FAF9F5">
 <link rel="canonical" href="${esc(profile.siteUrl)}/">
-<link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/images/dey-intelligence-mark.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="${esc(profile.brand)}"><meta property="og:title" content="Dey Intelligence — Abhishek Dey, AI Engineer"><meta property="og:description" content="${esc(profile.description)}"><meta property="og:url" content="${esc(profile.siteUrl)}/"><meta property="og:image" content="${esc(profile.siteUrl)}/og-v2.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -174,7 +174,7 @@ export const homeHtml = `<!doctype html>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="top"><div class="wrap"><a class="brand" href="/">${esc(profile.brand)}</a><nav class="main" aria-label="Main">${navLinks}</nav></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="/"><img src="/mark.svg" alt="" width="28" height="28">${esc(profile.brand)}</a><nav class="main" aria-label="Main">${navLinks}</nav></div></header>
 <main id="main">
 
 <section class="hero" id="top">

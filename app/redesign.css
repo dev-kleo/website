@@ -262,3 +262,10 @@ input, select, textarea { max-width: 100%; font-size: 16px; }
 .menu-nav { justify-content: flex-start; }
 .menu-nav > a:first-child { margin-top: auto; }
 .menu-nav > a:last-child { margin-bottom: auto; }
+
+/* Brand mark: light/dark variants follow data-theme; menu and footer sit on dark, so they use the dark mark only. */
+.brand-mark { display: block; flex: none; margin-right: 10px; }
+.brand-mark-dark, [data-theme="dark"] .brand-mark-light { display: none; }
+[data-theme="dark"] .brand-mark-dark { display: block; }
+.menu-brand, .brand-line { display: inline-flex; align-items: center; }
+.footer-base { align-items: center; }

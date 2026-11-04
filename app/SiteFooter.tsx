@@ -1,3 +1,4 @@
+import { BrandMark } from "./BrandMark";
 import { FundingHeading } from "./FundingHeading";
 import { profile } from "./site-config";
 
@@ -35,7 +36,7 @@ export function SiteFooter({ compact = false }: { compact?: boolean }) {
         />
       </a>
       </>}
-      <div className="mono footer-base"><span>© 2026 {profile.name}</span><span>{profile.brand} · Research &amp; product studio</span></div>
+      <div className="mono footer-base"><span>© 2026 {profile.name}</span><span className="brand-line"><BrandMark dark size={32} />{profile.brand} · Research &amp; product studio</span></div>
     </footer>
   );
 }

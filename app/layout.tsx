@@ -12,12 +12,10 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "Dey Intelligence — Abhishek Dey, AI Engineer", description: profile.description, images: ["/og-v2.png"] },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
       { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/images/dey-intelligence-mark.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
     ],
-    shortcut: "/favicon.ico",
-    apple: "/images/dey-intelligence-mark.png",
+    apple: "/apple-touch-icon.png",
   },
 };
 

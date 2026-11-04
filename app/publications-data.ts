@@ -73,7 +73,7 @@ export const publications: Publication[] = [
     applications: ["Education & AI"],
     domains: ["AI & Data Science"],
     methods: ["Critical integrative review"],
-    // TODO: add links.researchsquare once the Research Square URL is confirmed.
+    links: { researchsquare: "https://doi.org/10.21203/rs.3.rs-11020094/v1" },
   },
   {
     id: "beyond-the-agent-label",

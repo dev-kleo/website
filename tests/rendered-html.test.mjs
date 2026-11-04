@@ -34,6 +34,6 @@ test("publication links are real, specific URLs", async () => {
   for (const p of publications) {
     const urls = [...(p.venueUrl !== undefined ? [["venueUrl", p.venueUrl]] : []), ...Object.entries(p.links ?? {})];
     for (const [key, url] of urls) assert.ok(!bad(url), `${p.id}.${key} is empty, example.com or a bare homepage: "${url}"`);
-    assert.ok(["Preprint", "Working paper", "Under review", "Published"].includes(p.status), `${p.id} has an invalid status`);
+    assert.ok(["Preprint", "Under review", "In preparation", "Published"].includes(p.status), `${p.id} has an invalid status`);
   }
 });

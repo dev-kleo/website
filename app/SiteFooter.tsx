@@ -2,7 +2,7 @@ import { BrandMark } from "./BrandMark";
 import { FundingHeading } from "./FundingHeading";
 import { profile } from "./site-config";
 
-// compact drops the app-promo extras (Flappy Bird privacy links, Product Hunt badge) for focused pages.
+// compact drops the app-promo extras (Product Hunt badge) for focused pages.
 export function SiteFooter({ compact = false }: { compact?: boolean }) {
   return (
     <footer className="site-footer" id="contact">
@@ -16,10 +16,6 @@ export function SiteFooter({ compact = false }: { compact?: boolean }) {
         <a href={profile.links.linkedin}>LinkedIn</a>
       </div>
       {!compact && <>
-      <div className="mono footer-links">
-        <a href="/flappy-bird/privacy">Flappy Bird privacy policy</a>
-        <a href="/flappy-bird/privacy/ru" hrefLang="ru" lang="ru">Политика конфиденциальности</a>
-      </div>
       <a
         className="producthunt"
         href="https://www.producthunt.com/products/openhighlights-keep-what-matters?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-openhighlights-keep-what-matters"

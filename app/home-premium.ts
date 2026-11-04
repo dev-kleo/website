@@ -230,7 +230,7 @@ ${experienceRows}
 <h2 class="reveal">Open to a conversation.</h2>
 <p class="sub">For research supervision, PhD opportunities, or collaboration.</p>
 <a class="mail" href="mailto:${esc(profile.links.email)}">${esc(profile.links.email)}</a>
-<div class="foot mono"><div>&copy; 2026 ${esc(profile.name)} &middot; Chelyabinsk, Russia</div><nav aria-label="Footer"><a href="${esc(profile.links.github)}">GitHub</a><a href="${esc(profile.links.linkedin)}">LinkedIn</a><a href="${esc(profile.links.orcid)}">ORCID</a><a href="/flappy-bird/privacy">Privacy</a></nav></div>
+<div class="foot mono"><div>&copy; 2026 ${esc(profile.name)} &middot; Chelyabinsk, Russia</div><nav aria-label="Footer"><a href="${esc(profile.links.github)}">GitHub</a><a href="${esc(profile.links.linkedin)}">LinkedIn</a><a href="${esc(profile.links.orcid)}">ORCID</a></nav></div>
 </div></section>
 
 </main>

@@ -47,7 +47,7 @@ export const experience = [
 ] as const;
 
 export const navigationItems = [
-  { href: "/projects", label: "Work" },
+  { href: "/projects", label: "Projects" },
   ...(hasWriting ? [{ href: "/publications", label: "Publications" }] : []),
   ...(hasReading ? [{ href: "/reading", label: "Reading" }] : []),
   { href: "/about", label: "About" },

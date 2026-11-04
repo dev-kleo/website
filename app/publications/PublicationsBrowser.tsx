@@ -11,8 +11,6 @@ const PARAM: Record<Key, string> = { applications: "app", domains: "domain", met
 const KEYS = Object.keys(PARAM) as Key[];
 const EMPTY: Sel = { applications: [], domains: [], methods: [] };
 const TOTAL = publications.length;
-const FILTER_MIN = 8; // below this, filters, search and counts are noise
-const TOOLS = TOTAL >= FILTER_MIN;
 
 const unique = (key: Key) => [...new Set(publications.flatMap((p) => p[key]))].sort((a, b) => a.localeCompare(b));
 const OPTIONS: Record<Key, string[]> = { applications: unique("applications"), domains: unique("domains"), methods: unique("methods") };
@@ -47,7 +45,7 @@ export function PublicationsBrowser() {
   }, []);
 
   useEffect(() => {
-    if (!ready || !TOOLS) return;
+    if (!ready) return;
     const params = new URLSearchParams();
     KEYS.forEach((k) => sel[k].forEach((v) => params.append(PARAM[k], v)));
     if (query.trim()) params.set("q", query.trim());
@@ -80,7 +78,7 @@ export function PublicationsBrowser() {
           <li key={p.id} className="pub-item">
             <h4>{p.title}</h4>
             <Authors names={p.authors} />
-            <p className="pub-meta"><span className="pub-badge">{p.statusNote ? `${p.status} (${p.statusNote})` : p.status}</span>{p.venue && <span className="pub-venue">{p.venueUrl ? <a href={p.venueUrl}>{p.venue}</a> : p.venue}</span>}</p>
+            <p className="pub-meta"><span className="pub-badge">{p.status}</span>{(p.venue || p.statusNote) && <span className="pub-venue">{p.venue && (p.venueUrl ? <a href={p.venueUrl}>{p.venue}</a> : p.venue)}{p.venue && p.statusNote && " · "}{p.statusNote && `Submitted to ${p.statusNote}`}</span>}</p>
             {p.abstract && <p className="pub-abstract">{p.abstract}</p>}
             {(p.applications.length + p.domains.length + p.methods.length > 0) && <p className="pub-tags">
               {p.applications.map((t) => <span className="pub-tag t-app" key={t}>{t}</span>)}
@@ -115,8 +113,6 @@ export function PublicationsBrowser() {
       <p className="pub-links"><a href={profile.links.orcid}>ORCID</a>{profile.links.scholar && <a href={profile.links.scholar}>Google Scholar</a>}</p>
     </div>
   );
-  if (!TOOLS) return <div className="pub-main">{list}</div>;
-
   return (
     <>
       {cards("applications", "Browse by application", "Select one or more. Select again to remove.", "pub-app")}

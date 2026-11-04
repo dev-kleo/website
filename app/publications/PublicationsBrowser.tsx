@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { profile } from "../site-config";
-import { publications, type Publication } from "../publications-data";
+import { LINK_LABELS, publications, type Publication } from "../publications-data";
 
 type Key = "applications" | "domains" | "methods";
 type Sel = Record<Key, string[]>;
@@ -11,6 +11,8 @@ const PARAM: Record<Key, string> = { applications: "app", domains: "domain", met
 const KEYS = Object.keys(PARAM) as Key[];
 const EMPTY: Sel = { applications: [], domains: [], methods: [] };
 const TOTAL = publications.length;
+const FILTER_MIN = 8; // below this, filters, search and counts are noise
+const TOOLS = TOTAL >= FILTER_MIN;
 
 const unique = (key: Key) => [...new Set(publications.flatMap((p) => p[key]))].sort((a, b) => a.localeCompare(b));
 const OPTIONS: Record<Key, string[]> = { applications: unique("applications"), domains: unique("domains"), methods: unique("methods") };
@@ -18,7 +20,7 @@ const OPTIONS: Record<Key, string[]> = { applications: unique("applications"), d
 // OR within a group, AND across groups; `skip` leaves one group out so its own counts ignore its selection.
 function matches(p: Publication, sel: Sel, q: string, skip?: Key) {
   if (!KEYS.every((k) => k === skip || !sel[k].length || sel[k].some((v) => p[k].includes(v)))) return false;
-  return !q || [p.title, ...p.authors, p.venue, ...p.applications, ...p.domains, ...p.methods].join(" ").toLowerCase().includes(q);
+  return !q || [p.title, ...p.authors, p.venue ?? "", p.status, ...p.applications, ...p.domains, ...p.methods].join(" ").toLowerCase().includes(q);
 }
 
 function Authors({ names }: { names: string[] }) {
@@ -30,6 +32,7 @@ export function PublicationsBrowser() {
   const [query, setQuery] = useState("");
   const [ready, setReady] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [cited, setCited] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const q = query.trim().toLowerCase();
 
@@ -44,7 +47,7 @@ export function PublicationsBrowser() {
   }, []);
 
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || !TOOLS) return;
     const params = new URLSearchParams();
     KEYS.forEach((k) => sel[k].forEach((v) => params.append(PARAM[k], v)));
     if (query.trim()) params.set("q", query.trim());
@@ -63,6 +66,37 @@ export function PublicationsBrowser() {
     try { await navigator.clipboard.writeText(location.href); setCopied(true); setTimeout(() => setCopied(false), 1800); } catch { /* clipboard blocked: URL bar already holds the link */ }
   };
 
+  const cite = async (p: Publication) => {
+    try { await navigator.clipboard.writeText(p.bibtex ?? ""); setCited(p.id); setTimeout(() => setCited(""), 1800); } catch { /* clipboard blocked */ }
+  };
+
+  const list = results.length === 0 ? (
+    <div className="pub-empty"><p>No works match these filters.</p>{active && <button type="button" onClick={clear}>Clear filters</button>}</div>
+  ) : years.map((y) => (
+    <section className="pub-year" key={y} aria-label={`${y} publications`}>
+      <h3>{y}</h3>
+      <ol>
+        {results.filter((p) => p.year === y).map((p) => (
+          <li key={p.id} className="pub-item">
+            <h4>{p.title}</h4>
+            <Authors names={p.authors} />
+            <p className="pub-meta"><span className="pub-badge">{p.status}</span>{p.venue && <span className="pub-venue">{p.venueUrl ? <a href={p.venueUrl}>{p.venue}</a> : p.venue}</span>}</p>
+            {p.abstract && <p className="pub-abstract">{p.abstract}</p>}
+            <p className="pub-tags">
+              {p.applications.map((t) => <span className="pub-tag t-app" key={t}>{t}</span>)}
+              {p.domains.map((t) => <span className="pub-tag t-dom" key={t}>{t}</span>)}
+              {p.methods.map((t) => <span className="pub-tag t-meth" key={t}>{t}</span>)}
+            </p>
+            <p className="pub-links">
+              {(Object.keys(LINK_LABELS) as (keyof typeof LINK_LABELS)[]).map((k) => p.links?.[k] && <a key={k} href={p.links[k]}>{LINK_LABELS[k]}</a>)}
+              {p.bibtex && <button type="button" className="pub-link" onClick={() => cite(p)}>{cited === p.id ? "Copied" : "Cite"}</button>}
+            </p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  ));
+
   const cards = (k: Key, title: string, hint: string, cls: string) => (
     <section className={`pub-block ${cls}`} aria-labelledby={`pub-${k}`}>
       <div className="pub-block-head"><h2 id={`pub-${k}`}>{title}</h2><p>{hint}</p></div>
@@ -74,6 +108,14 @@ export function PublicationsBrowser() {
       </div>
     </section>
   );
+
+  if (TOTAL === 0) return (
+    <div className="pub-empty pub-soon">
+      <p>Research in progress. Preprints and papers will appear here.</p>
+      <p className="pub-links"><a href={profile.links.orcid}>ORCID</a>{profile.links.scholar && <a href={profile.links.scholar}>Google Scholar</a>}</p>
+    </div>
+  );
+  if (!TOOLS) return <div className="pub-main">{list}</div>;
 
   return (
     <>
@@ -98,28 +140,7 @@ export function PublicationsBrowser() {
             <button type="button" className="pub-link" onClick={copy}>{copied ? "Copied" : "Copy link to this view"}</button>
           </div>
 
-          {results.length === 0 ? (
-            <div className="pub-empty"><p>No works match these filters.</p>{active && <button type="button" onClick={clear}>Clear filters</button>}</div>
-          ) : years.map((y) => (
-            <section className="pub-year" key={y} aria-label={`${y} publications`}>
-              <h3>{y}</h3>
-              <ol>
-                {results.filter((p) => p.year === y).map((p) => (
-                  <li key={p.id} className="pub-item">
-                    <h4>{p.title}</h4>
-                    <Authors names={p.authors} />
-                    <p className="pub-venue">{p.venueUrl ? <a href={p.venueUrl}>{p.venue}</a> : p.venue}{p.badges?.map((b) => <span className="pub-badge" key={b}>{b}</span>)}</p>
-                    <p className="pub-tags">
-                      {p.applications.map((t) => <span className="pub-tag t-app" key={t}>{t}</span>)}
-                      {p.domains.map((t) => <span className="pub-tag t-dom" key={t}>{t}</span>)}
-                      {p.methods.map((t) => <span className="pub-tag t-meth" key={t}>{t}</span>)}
-                    </p>
-                    {p.links && <p className="pub-links">{p.links.map((l) => <a key={l.label} href={l.url}>{l.label}</a>)}</p>}
-                  </li>
-                ))}
-              </ol>
-            </section>
-          ))}
+          {list}
         </div>
       </div>
     </>

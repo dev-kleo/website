@@ -1,3 +1,20 @@
 # Next.js fingerprints these build assets, so they can be cached indefinitely.
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Security headers for every response. CSP ships Report-Only first: it logs
+# violations to the browser console without blocking anything, so it's safe
+# to deploy immediately. The two script-src hashes cover the two static
+# inline bootstrap scripts in app/layout.tsx only. Next.js/Turbopack also
+# injects its own inline hydration scripts whose content changes every
+# build; those aren't hashed here and will show up as violations in
+# Report-Only mode. Do not switch this to an enforcing
+# Content-Security-Policy until that's addressed (e.g. 'unsafe-inline'
+# fallback or a per-response nonce), or the site will break.
+/*
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'sha256-CFXqrsy/Zbe9/nF00ATRBF7Sz8rSLVz0D/0EnYEa4h4=' 'sha256-bfHcDt/F6TY8t6rwFtaHdKLIg+E3WbtMwip5x65/Vz0='; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://api.producthunt.com https://covers.openlibrary.org; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()

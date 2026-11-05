@@ -1,14 +1,14 @@
 // Premium homepage markup served by app/index.html/route.ts.
 // Content comes from the existing data modules, so papers, projects, writing and
-// the reading shelf stay in one place. The previous story homepage is still in
-// home-3d.ts and the classic layout is still served at /classic.
+// the reading shelf stay in one place. The classic layout is still served at
+// /classic.
 import { projects } from "./projects-data";
 import { currentlyReading } from "./reading-data";
 import { experience, navigationItems, profile } from "./site-config";
 import { academicPapers, blogPosts } from "./writing-data";
 
 const esc = (value: string) =>
-  value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 
 const isPublic = (href: string) => /^https?:\/\//.test(href);
 

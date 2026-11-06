@@ -125,6 +125,17 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--clay);outline-offse
 .m-cta{display:flex;align-items:center;justify-content:center;min-height:52px;margin-top:8px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:16px;font-weight:500}
 .m-nav a,.m-foot{opacity:0;transform:translateY(14px);transition:opacity .2s,transform .2s}
 .m-ov.open .m-nav a,.m-ov.open .m-foot{opacity:1;transform:none;transition:opacity .4s cubic-bezier(.22,1,.36,1) calc(80ms + var(--i,0)*50ms),transform .4s cubic-bezier(.22,1,.36,1) calc(80ms + var(--i,0)*50ms)}
+section#film{border-top:0}
+section#film .wrap{padding-top:0}
+.ad{position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:#141413}
+.ad video{display:block;width:100%;height:100%;object-fit:cover}
+.ad-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;padding:0;background:rgba(20,20,19,.18);cursor:pointer;transition:background .25s}
+.ad-play:hover{background:rgba(20,20,19,.32)}
+.ad-play span{width:84px;height:84px;border-radius:50%;background:var(--paper);color:var(--ink);display:flex;align-items:center;justify-content:center;transition:transform .4s var(--ease)}
+.ad-play:hover span{transform:scale(1.06)}
+.ad-play svg{margin-left:4px}
+.ad.on .ad-play{display:none}
+@media (prefers-reduced-motion:reduce){.ad-play,.ad-play span{transition:none!important}.ad-play:hover span{transform:none!important}}
 @media (max-width:768px){nav.main{display:none}.burger-btn{display:inline-flex}.m-ov{display:flex}header.top .wrap{flex-wrap:nowrap}.brand{min-width:0}}
 @media (max-width:768px) and (max-height:640px){.m-nav a{min-height:48px;padding:6px 0;font-size:30px}}
 @media (prefers-reduced-motion:reduce){
@@ -238,6 +249,11 @@ ${menuHtml}
 </div>
 </section>
 
+<section class="block" id="film"><div class="wrap"><div class="ad reveal">
+<video aria-label="Dey Intelligence ad, 15 seconds" poster="/media/poster.jpg" playsinline preload="metadata"><source src="/media/dey-ad-1080p.webm" type="video/webm"><source src="/media/dey-ad.mp4" type="video/mp4"></video>
+<button type="button" class="ad-play" aria-label="Play Dey Intelligence ad, 15 seconds"><span><svg width="26" height="30" viewBox="0 0 26 30" fill="currentColor" aria-hidden="true"><path d="M0 0l26 15L0 30z"/></svg></span></button>
+</div></div></section>
+
 <section class="block" id="research"><div class="wrap"><div class="split reveal">
 <div><p class="eyebrow" style="margin-bottom:16px">Research</p><h2 class="h">Trade, markets, and the machines that read them.</h2></div>
 <div class="span2"><p class="intro">Working papers, preprints and articles on generative AI, AI governance and macroeconomics.</p><div class="list">
@@ -280,6 +296,7 @@ ${experienceRows}
 
 </main>
 <script>${menuScript}</script>
+<script>(function(){var b=document.querySelector(".ad-play");if(!b)return;var w=b.parentNode,v=w.querySelector("video");b.addEventListener("click",function(){v.controls=true;v.muted=false;w.classList.add("on");v.play();v.focus()})})()</script>
 </body>
 </html>
 `;

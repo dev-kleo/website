@@ -10,6 +10,7 @@ import { WebsiteTranslator } from "./WebsiteTranslator";
 const GREETINGS = ["Dey Intelligence", "Hello", "नमस्ते", "নমস্কার", "Привет"];
 
 const MENU = [
+  { href: "/#services", label: "Services", key: "services" },
   { href: "/#research", label: "Research", key: "research" },
   { href: "/#projects", label: "Projects", key: "projects" },
   { href: "/#experience", label: "Experience", key: "experience" },

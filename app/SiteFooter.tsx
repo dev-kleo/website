@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BrandMark } from "./BrandMark";
 import { FundingHeading } from "./FundingHeading";
 import { profile } from "./site-config";
@@ -9,6 +10,7 @@ export function SiteFooter({ compact = false }: { compact?: boolean }) {
       <div className="mono dim">Contact</div>
       <FundingHeading />
       <div className="mono footer-links">
+        <Link href="/#services">Services</Link>
         <a href={`mailto:${profile.links.email}`}>{profile.links.email}</a>
         <a href={profile.links.orcid}>ORCID</a>
         {profile.links.scholar && <a href={profile.links.scholar}>Google Scholar</a>}

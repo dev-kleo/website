@@ -5,11 +5,11 @@ import { profile } from "./site-config";
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.siteUrl),
-  title: { default: "Dey Intelligence — Abhishek Dey, AI Engineer", template: "%s" },
+  title: { default: "Dey Intelligence — Abhishek Dey, Independent Researcher & Entrepreneur", template: "%s" },
   description: profile.description,
   alternates: { canonical: "/" },
-  openGraph: { type: "website", siteName: profile.brand, title: "Dey Intelligence — Abhishek Dey, AI Engineer", description: profile.description, images: [{ url: "/og-v2.png", width: 1731, height: 909, alt: "Dey Intelligence — Abhishek Dey, AI Engineer & Product Builder" }] },
-  twitter: { card: "summary_large_image", title: "Dey Intelligence — Abhishek Dey, AI Engineer", description: profile.description, images: ["/og-v2.png"] },
+  openGraph: { type: "website", siteName: profile.brand, title: "Dey Intelligence — Abhishek Dey, Independent Researcher & Entrepreneur", description: profile.description, images: [{ url: "/og-v2.png", width: 1731, height: 909, alt: "Dey Intelligence — Abhishek Dey, Independent Researcher & Entrepreneur" }] },
+  twitter: { card: "summary_large_image", title: "Dey Intelligence — Abhishek Dey, Independent Researcher & Entrepreneur", description: profile.description, images: ["/og-v2.png"] },
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },

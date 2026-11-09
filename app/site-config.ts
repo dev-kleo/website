@@ -1,8 +1,8 @@
 export const profile = {
   name: "Abhishek Dey",
   brand: "Dey Intelligence",
-  role: "AI Engineer & Product Builder",
-  description: "Portfolio of Abhishek Dey, an AI engineer and product builder creating reliable AI systems, developer tools, and research-driven software.",
+  role: "Independent Researcher & Entrepreneur",
+  description: "Abhishek Dey is an independent researcher and entrepreneur working on economics, AI and software, with services for businesses, startups, universities and research teams.",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://deyintelligence.com",
   currentFocusUpdated: "September 1, 2026",
   links: {
@@ -47,6 +47,7 @@ export const experience = [
 ] as const;
 
 export const navigationItems = [
+  { href: "/#services", label: "Services" },
   { href: "/projects", label: "Projects" },
   ...(hasWriting ? [{ href: "/publications", label: "Publications" }] : []),
   ...(hasReading ? [{ href: "/reading", label: "Reading" }] : []),

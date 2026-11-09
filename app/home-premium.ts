@@ -50,14 +50,14 @@ a.row:hover{background:#F5F4ED;padding-left:24px}
 @keyframes drift{to{background-position:64px 64px}}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(180,70,42,.5)}100%{box-shadow:0 0 0 10px rgba(180,70,42,0)}}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--clay);margin-right:12px;vertical-align:1px;animation:pulse 2.2s ease-out infinite}
-@keyframes typing{to{width:28ch}}
-.type{display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:bottom;width:0;animation:typing 2s steps(28) .9s forwards}
+@keyframes typing{to{width:37ch}}
+.type{display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:bottom;width:0;animation:typing 2.4s steps(37) .9s forwards}
 @keyframes blink{50%{opacity:0}}
 .caret{display:inline-block;width:1ch;height:1.1em;background:var(--ink);margin-left:4px;vertical-align:-3px;animation:blink 1.1s steps(1) infinite}
 .hero{position:relative;overflow:hidden}
 .hero .wrap{position:relative;padding-top:144px;padding-bottom:96px}
-.hero h1{max-width:900px;font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:clamp(44px,7.2vw,92px);line-height:1.02;letter-spacing:-.025em}
-.hero .lede{margin-top:36px;max-width:620px;font-size:20px;line-height:1.55;color:var(--muted)}
+.hero h1{max-width:980px;font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:clamp(38px,5.6vw,72px);line-height:1.05;letter-spacing:-.025em}
+.hero .lede{margin-top:36px;max-width:680px;font-size:20px;line-height:1.55;color:var(--muted)}
 .hero .lede b{color:var(--ink);font-weight:500}
 .cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:48px}
 .links{display:flex;flex-wrap:wrap;gap:12px 32px;margin-top:28px;font-size:13px;color:var(--muted)}
@@ -66,6 +66,7 @@ a.row:hover{background:#F5F4ED;padding-left:24px}
 .strip .k{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .strip .v{margin-top:10px;font-size:16px;line-height:1.5}
 .strip .v span{color:var(--muted)}
+.phd{margin-top:28px;font-size:13px;color:var(--muted)}
 section.block{border-top:1px solid var(--line)}
 section.block .wrap{padding-top:128px;padding-bottom:128px}
 .split{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:64px}
@@ -127,6 +128,25 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--clay);outline-offse
 .m-ov.open .m-nav a,.m-ov.open .m-foot{opacity:1;transform:none;transition:opacity .4s cubic-bezier(.22,1,.36,1) calc(80ms + var(--i,0)*50ms),transform .4s cubic-bezier(.22,1,.36,1) calc(80ms + var(--i,0)*50ms)}
 section#film{border-top:0}
 section#film .wrap{padding-top:0}
+section.block#services{border-top:0}
+section#services .wrap{padding-top:32px}
+.svc-head{margin-bottom:56px}
+.svc-head .intro{margin:20px 0 0}
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.svc-card{display:flex;flex-direction:column;background:var(--soft);border:1px solid var(--line);border-radius:24px;padding:32px;transition:transform .5s var(--ease),border-color .3s,box-shadow .3s}
+.svc-card:hover{transform:translateY(-6px);border-color:#CFCDC2}
+.svc-card .tag{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.svc-card h3{margin-top:14px;font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:28px;line-height:1.15;letter-spacing:-.01em}
+.svc-card p{margin-top:12px;font-size:16px;line-height:1.55;color:var(--muted)}
+.svc-card ul{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--line)}
+.svc-card li{padding:10px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.4}
+.svc-card .btn-line{align-self:flex-start;margin-top:28px;padding:11px 22px;font-size:14px;background:var(--paper)}
+.svc-card .btn-line:hover{background:#fff}
+.how{margin-top:72px;border-top:1px solid #CFCDC2;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.how>div{padding:24px 24px 0 0}
+.how .k{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.how .v{margin-top:10px;font-size:16px;line-height:1.5}
+.how .v span{color:var(--muted)}
 .ad{position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:#141413}
 .ad video{display:block;width:100%;height:100%;object-fit:cover}
 .ad-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;padding:0;background:rgba(20,20,19,.18);cursor:pointer;transition:background .25s}
@@ -144,10 +164,10 @@ section#film .wrap{padding-top:0}
 @media (prefers-reduced-motion:reduce){
 html{scroll-behavior:auto}
 .grid-bg,.dot,.caret{animation:none!important}
-.type{animation:none!important;width:28ch}
+.type{animation:none!important;width:37ch}
 .hero-in,.reveal{animation:none!important;opacity:1!important;transform:none!important}
-.btn-dark,.btn-line,.row,.card,.link-arrow,.contact .mail{transition:none!important}
-.btn-dark:hover,.btn-line:hover,.card:hover,.link-arrow:hover,.contact .mail:hover{transform:none!important}
+.btn-dark,.btn-line,.row,.card,.svc-card,.link-arrow,.contact .mail{transition:none!important}
+.btn-dark:hover,.btn-line:hover,.card:hover,.svc-card:hover,.link-arrow:hover,.contact .mail:hover{transform:none!important}
 }
 `;
 
@@ -185,6 +205,35 @@ const experienceRows = experience
   )
   .join("\n");
 
+const services = [
+  { audience: "Small businesses", title: "Be found and trusted online", text: "Websites, security and advertising for businesses that want customers to find them.", points: ["Website design and development", "WordPress care and security", "Google Ads setup", "Google Ads management"] },
+  { audience: "Startups", title: "Get a working product out", text: "AI-assisted builds that take an idea to something real users can try.", points: ["AI-assisted MVPs", "Browser extensions", "Telegram bots and RAG assistants", "Android apps"] },
+  { audience: "Universities", title: "AI that serves students", text: "Assistants and advice for institutions adopting AI responsibly.", points: ["AI information assistants for students", "Answers drawn from verified university sources", "AI governance advice", "Oversight for higher education"] },
+  { audience: "Research teams", title: "Analysis you can defend", text: "Careful quantitative work, from raw data to a reproducible result.", points: ["Econometric analysis", "Trade-data analysis", "Systematic reviews", "Python research workflows"] },
+];
+
+const serviceCards = services
+  .map(
+    (item) =>
+      `<article class="svc-card"><div class="tag mono">${esc(item.audience)}</div><h3>${esc(item.title)}</h3><p>${esc(item.text)}</p><ul>${item.points.map((point) => `<li>${esc(point)}</li>`).join("")}</ul><a class="btn-line" href="mailto:${esc(profile.links.email)}?subject=${encodeURIComponent(`Services: ${item.audience}`)}">Get in touch</a></article>`,
+  )
+  .join("\n");
+
+const process = [
+  ["Discuss", "We talk through the problem and what success looks like."],
+  ["Scope", "I propose a clear plan, timeline and deliverables."],
+  ["Build", "I do the work and keep you updated as it moves."],
+  ["Hand over", "You get the finished work, documentation and support."],
+];
+
+const servicesHtml = `<section class="block" id="services" aria-labelledby="services-h"><div class="wrap">
+<div class="svc-head reveal"><p class="eyebrow" style="margin-bottom:16px">Services</p><h2 class="h" id="services-h">Services.</h2><p class="intro">Research, software and AI for people who need it done properly.</p></div>
+<div class="svc reveal">
+${serviceCards}
+</div>
+<div class="how reveal" role="list" aria-label="How I work">${process.map(([name, line], i) => `<div role="listitem"><div class="k mono">${String(i + 1).padStart(2, "0")} &middot; ${name}</div><div class="v"><span>${esc(line)}</span></div></div>`).join("")}</div>
+</div></section>`;
+
 const navLinks = [
   ...navigationItems.map((item) => `<a class="nav-link" href="${esc(item.href)}">${esc(item.label)}</a>`),
   `<a class="nav-link" href="#contact">Contact</a>`,
@@ -215,12 +264,12 @@ export const homeHtml = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Dey Intelligence — Abhishek Dey, AI Engineer</title>
+<title>Dey Intelligence — Abhishek Dey, Independent Researcher &amp; Entrepreneur</title>
 <meta name="description" content="${esc(profile.description)}">
 <meta name="theme-color" content="#FAF9F5">
 <link rel="canonical" href="${esc(profile.siteUrl)}/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta property="og:type" content="website"><meta property="og:site_name" content="${esc(profile.brand)}"><meta property="og:title" content="Dey Intelligence — Abhishek Dey, AI Engineer"><meta property="og:description" content="${esc(profile.description)}"><meta property="og:url" content="${esc(profile.siteUrl)}/"><meta property="og:image" content="${esc(profile.siteUrl)}/og-v2.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="${esc(profile.brand)}"><meta property="og:title" content="Dey Intelligence — Abhishek Dey, Independent Researcher &amp; Entrepreneur"><meta property="og:description" content="${esc(profile.description)}"><meta property="og:url" content="${esc(profile.siteUrl)}/"><meta property="og:image" content="${esc(profile.siteUrl)}/og-v2.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -235,10 +284,10 @@ ${menuHtml}
 <section class="hero" id="top">
 <div class="grid-bg" aria-hidden="true"></div>
 <div class="wrap">
-<p class="hero-in mono eyebrow-line" style="margin:0 0 28px;font-size:13px;letter-spacing:.04em;color:var(--muted);font-weight:500"><span class="dot" aria-hidden="true"></span><span class="type">seeking phd positions &middot; 2027</span><span class="caret" aria-hidden="true"></span></p>
-<h1 class="hero-in d1">Research at the intersection of economics and AI.</h1>
-<p class="lede hero-in d2"><b>${esc(profile.name)}.</b> MSc candidate in Economics (International Business) at South Ural State University. Alongside my studies, I build and ship AI-assisted software.</p>
-<div class="cta hero-in d3"><a class="btn-dark" href="#research">Read my research</a><a class="btn-line" href="/projects">Explore projects</a></div>
+<p class="hero-in mono eyebrow-line" style="margin:0 0 28px;font-size:13px;letter-spacing:.04em;color:var(--muted);font-weight:500"><span class="dot" aria-hidden="true"></span><span class="type">independent researcher &middot; entrepreneur</span><span class="caret" aria-hidden="true"></span></p>
+<h1 class="hero-in d1">Independent researcher and entrepreneur: economics, AI, and the software that puts them to work.</h1>
+<p class="lede hero-in d2"><b>${esc(profile.name)}.</b> researches economics and AI, builds and ships software products, and works with businesses, startups, universities and research teams. He is an MSc Economics (International Business) candidate at South Ural State University.</p>
+<div class="cta hero-in d3"><a class="btn-dark" href="#services">Work with me</a><a class="btn-line" href="#research">Read my research</a></div>
 <div class="links mono hero-in d4"><a class="link-arrow" href="${esc(profile.links.orcid)}">ORCID 0009-0007-4913-7090 &#8599;</a><a class="link-arrow" href="${esc(profile.links.github)}">GitHub &#8599;</a><a class="link-arrow" href="${esc(profile.links.linkedin)}">LinkedIn &#8599;</a><a class="link-arrow" href="mailto:${esc(profile.links.email)}">Email &#8599;</a></div>
 <div class="strip hero-in d4">
 <div><div class="k mono">Degree</div><div class="v">MSc Economics (International Business)<br><span>South Ural State University, 2025&ndash;2027</span></div></div>
@@ -246,8 +295,11 @@ ${menuHtml}
 <div><div class="k mono">Research</div><div class="v">Generative AI, AI governance<br><span>Macroeconomics and inflation</span></div></div>
 <div><div class="k mono">Languages</div><div class="v">IELTS 7.0<br><span>English, Russian (A2), Bengali, Hindi</span></div></div>
 </div>
+<p class="phd mono hero-in d4">Open to funded PhD positions, 2027</p>
 </div>
 </section>
+
+${servicesHtml}
 
 <section class="block" id="film"><div class="wrap"><div class="ad reveal">
 <video aria-label="Dey Intelligence ad, 15 seconds" poster="/media/poster.jpg" playsinline preload="metadata"><source src="/media/dey-ad-1080p.webm" type="video/webm"><source src="/media/dey-ad.mp4" type="video/mp4"></video>
@@ -263,7 +315,7 @@ ${paperRows}
 
 <section class="projects" id="projects"><div class="wrap">
 <p class="eyebrow" style="margin-bottom:16px">Projects</p>
-<h2 class="reveal">Small tools, shipped and in use.</h2>
+<h2 class="reveal">Ventures and tools</h2>
 <div class="cards reveal">
 ${projectCards}
 </div>
@@ -289,9 +341,9 @@ ${experienceRows}
 
 <section class="contact" id="contact"><div class="wrap">
 <h2 class="reveal">Open to a conversation.</h2>
-<p class="sub">For research supervision, PhD opportunities, or collaboration.</p>
+<p class="sub">For project work, partnerships, research collaboration and PhD supervision.</p>
 <a class="mail" href="mailto:${esc(profile.links.email)}">${esc(profile.links.email)}</a>
-<div class="foot mono"><div>&copy; 2026 ${esc(profile.name)} &middot; Chelyabinsk, Russia</div><nav aria-label="Footer"><a href="${esc(profile.links.github)}">GitHub</a><a href="${esc(profile.links.linkedin)}">LinkedIn</a><a href="${esc(profile.links.orcid)}">ORCID</a></nav></div>
+<div class="foot mono"><div>&copy; 2026 ${esc(profile.name)} &middot; Chelyabinsk, Russia</div><nav aria-label="Footer"><a href="#services">Services</a><a href="${esc(profile.links.github)}">GitHub</a><a href="${esc(profile.links.linkedin)}">LinkedIn</a><a href="${esc(profile.links.orcid)}">ORCID</a></nav></div>
 </div></section>
 
 </main>

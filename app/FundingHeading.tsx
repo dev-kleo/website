@@ -14,8 +14,8 @@ export function FundingHeading() {
   return (
     <>
       <h2 className="footer-heading">
-        Open to research collaboration and{" "}
-        <button type="button" className="footer-funded" onClick={() => setOn(true)}>doctoral opportunities.</button>
+        Open to project work, research collaboration and{" "}
+        <button type="button" className="footer-funded" onClick={() => setOn(true)}>funded PhD positions.</button>
       </h2>
       {on && (
         <>

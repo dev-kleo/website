@@ -1,3 +1,5 @@
+export type ChartCopy = { top: string; product: string; illustration: string; ago: string; today: string; earlier: string; note: string; title: string; desc: string };
+
 export type Copy = {
   lang: "en" | "ru";
   path: string;
@@ -10,7 +12,6 @@ export type Copy = {
   cta: string;
   seeHow: string;
   facts: string[];
-  chart: { top: string; product: string; illustration: string; ago: string; today: string; earlier: string; note: string; title: string; desc: string };
   stepsCount: string;
   howKicker: string;
   howTitle: string;
@@ -34,17 +35,17 @@ export type Copy = {
   allWork: string;
   otherLangLabel: string;
   otherLangHref: string;
-};
+} & ({ chart: ChartCopy; screenshot?: never } | { screenshot: { alt: string; caption: string }; chart?: never });
 
 export const en: Copy = {
   lang: "en",
   path: "/ozon-price-tracker",
   title: "Ozon Price Tracker — Price History & Alerts for Chrome",
-  description: "Track price history on Ozon, Wildberries and Yandex Market with a Chrome extension. Set target-price alerts. Your data stays in your browser.",
+  description: "Track price history on Ozon, Wildberries and Yandex Market with a Chrome extension. Set target-price alerts. Your watchlist stays in your browser.",
   breadcrumb: "Ozon Price Tracker",
   kicker: "Chrome extension · Published",
   h1: "Price history for Ozon, Wildberries & Yandex Market.",
-  lede: "Price Tracker saves every price you check, shows how it moved, and flags the moment your target is reached. Your data stays in your browser.",
+  lede: "Price Tracker saves every price you check, shows how it moved, and alerts you when a price check finds your target has been reached. Your watchlist stays in your browser.",
   cta: "Add to Chrome",
   seeHow: "See how it works",
   facts: ["Ozon", "Wildberries", "Yandex Market", "No account"],
@@ -75,7 +76,7 @@ export const en: Copy = {
     ["Where price history lives", "In your browser, on your device", "On the service’s servers"],
     ["Account", "Not required", "Usually required"],
     ["Backup", "JSON export and import", "Depends on the service"],
-    ["Stores", "Ozon, Wildberries, Yandex Market", "Depends on the service"],
+    ["Stores", "Ozon, Wildberries, Yandex Market, AliExpress Russia", "Depends on the service"],
     ["Sync across devices", "No. Move history with a JSON backup", "Usually yes"],
   ],
   compareNote: "A general comparison. Features differ between services.",
@@ -84,7 +85,7 @@ export const en: Copy = {
   faqCount: "questions",
   faqs: [
     ["How do I track a price on Ozon?", "Install the extension from the Chrome Web Store, open a product on Ozon and save it to your watchlist. The tracker records its price over time and shows the history as a chart."],
-    ["Does it work with Wildberries and Yandex Market?", "Yes. Price Tracker supports Ozon, Wildberries and Yandex Market."],
+    ["Does it work with Wildberries and Yandex Market?", "Yes. Price Tracker supports Ozon, Wildberries and Yandex Market. AliExpress Russia is also available if you enable it in the extension settings."],
     ["Can I get an alert when a price drops?", "Yes. Set a target price for a product and the tracker flags it when the price reaches your target."],
     ["Where is my price history stored?", "In your browser’s local database, on your device. You can export a JSON backup and import it again whenever you want."],
     ["Do I need an account?", "No. The extension works without an account."],
@@ -101,61 +102,59 @@ export const en: Copy = {
 export const ru: Copy = {
   lang: "ru",
   path: "/ru/ozon-price-tracker",
-  title: "Отслеживание цен Ozon, Wildberries, Яндекс Маркет — Chrome",
-  description: "Расширение для Chrome: история цен и графики на Ozon, Wildberries и Яндекс Маркете. Уведомления о целевой цене. Данные хранятся в вашем браузере.",
-  breadcrumb: "Отслеживание цен на Ozon",
-  kicker: "Расширение для Chrome · Опубликовано",
-  h1: "Отслеживание цен на Ozon, Wildberries и Яндекс Маркете.",
-  lede: "Price Tracker сохраняет цену каждого товара, показывает, как она менялась, и отмечает момент, когда достигнута ваша цель. Данные остаются в вашем браузере.",
-  cta: "Установить в Chrome",
+  title: "История цен на Ozon — Price Tracker от Dey Intelligence",
+  description: "Отслеживайте цены на Ozon в Chrome. Price Tracker от Dey Intelligence показывает историю обычной цены и цены с Ozon Картой и уведомляет о достижении цели.",
+  breadcrumb: "История цен на Ozon",
+  kicker: "Расширение для Chrome",
+  h1: "Как отследить цену товара на Ozon",
+  lede: "Price Tracker от Dey Intelligence — расширение для Chrome, которое записывает цены выбранных товаров на Ozon. На графике можно сравнить обычную цену и цену с Ozon Картой, если для товара доступны обе.",
+  cta: "Установить из Chrome Web Store",
   seeHow: "Как это работает",
-  facts: ["Ozon", "Wildberries", "Яндекс Маркет", "Без аккаунта"],
-  chart: { top: "История цен · 90 дней", product: "Беспроводные наушники", illustration: "Иллюстрация", ago: "90 дней назад", today: "сегодня", earlier: "прежняя цена 9 090", note: "Пример данных, не реальный товар.", title: "График истории цены для примера товара", desc: "Почти 90 дней цена держится около 9 000 ₽, затем падает до 7 490 ₽." },
+  facts: ["Ozon", "Wildberries", "Яндекс Маркет", "AliExpress Россия", "Без регистрации"],
+  screenshot: { alt: "Карточка товара Ozon в расширении с графиком за 90 дней и подсказкой с ценой на выбранную дату", caption: "График истории цены в расширении. На скриншоте демонстрационные данные." },
   stepsCount: "3 шага",
-  howKicker: "От первого клика до хорошей цены",
-  howTitle: "Как это работает",
+  howKicker: "От добавления товара до сравнения цен",
+  howTitle: "Как посмотреть историю цен на Ozon",
   steps: [
-    ["01", "Установите расширение", "Добавьте Price Tracker из Chrome Web Store. Это займёт меньше минуты."],
-    ["02", "Сохраните товар", "Откройте товар на Ozon, Wildberries или Яндекс Маркете и добавьте его в список отслеживания."],
-    ["03", "Задайте цель и ждите", "Выберите цену, за которую готовы купить. Трекер хранит историю и отметит момент, когда цель достигнута."],
+    ["01", "Установите расширение", "Установите Price Tracker от Dey Intelligence из Chrome Web Store."],
+    ["02", "Добавьте товар с Ozon", "Откройте страницу нужного товара на Ozon и нажмите «Отслеживать цену». Расширение сохранит первую распознанную цену при добавлении товара. Фоновые проверки работают, пока запущен Chrome."],
+    ["03", "Откройте график в расширении", "Нажмите на значок расширения в Chrome и выберите товар в списке «Товары». На графике можно выбрать 30 дней, 90 дней или весь период. Чтобы показать или скрыть линию цены без карты, откройте настройки расширения и измените параметр «Показывать обычную цену»."],
   ],
-  featuresKicker: "Ничего лишнего",
-  featuresTitle: "Всё нужное. Ничего лишнего.",
+  featuresKicker: "Возможности расширения",
+  featuresTitle: "Сравнение цен и уведомления",
   featuresCount: "возможностей",
   features: [
-    ["История за каждой ценой", "Смотрите, как менялась цена товара, а не оценивайте один снимок. Каждое обновление попадает на понятный график."],
-    ["Цель, которая ждёт вас", "Укажите цену, за которую готовы купить. Трекер следит за ней и отметит момент, когда цель достигнута."],
-    ["Папки и графики по группам", "Раскладывайте товары по папкам и сравнивайте всю группу на одном графике, в том числе на весь экран."],
-    ["Одна спокойная панель", "Товары, текущие цены, изменения и статус уведомлений в одном месте, без десятка открытых вкладок."],
-    ["Нет в наличии — видно сразу", "Товары, которых нет в наличии, помечаются в списке, чтобы вы не проверяли страницы зря."],
-    ["Данные остаются у вас", "История цен хранится локально в браузере. Её можно экспортировать и импортировать как резервную копию JSON."],
+    ["С Ozon Картой и без неё", "Если расширение распознало обе цены, график показывает их отдельными линиями. При наведении на точку видны цена и дата."],
+    ["Уведомления о целевой цене", "В карточке товара нажмите «Уведомить, если ниже…» и задайте целевую цену. Если уведомления включены, расширение сообщит, когда при проверке обнаружит цену на уровне цели или ниже."],
+    ["Папки и общие графики", "Собирайте товары в папки, чтобы сравнить их цены на одном графике. График можно развернуть на весь экран."],
+    ["Четыре маркетплейса", "Кроме Ozon, расширение поддерживает Wildberries, Яндекс Маркет и AliExpress Россия. Доступ к AliExpress можно включить в настройках расширения."],
+    ["Наличие товара", "Если расширение определит, что товар закончился, в списке появится отметка «Нет в наличии»."],
+    ["Резервная копия", "История цен и список товаров хранятся в браузере. Их можно экспортировать в файл JSON и затем импортировать."],
   ],
-  compareKicker: "Локально или в облаке",
-  compareTitle: "Чем отличается от облачных трекеров",
-  compareHead: ["", "Price Tracker", "Типичный облачный трекер"],
+  compareKicker: "Хранение данных",
+  compareTitle: "Где хранится история цен",
+  compareHead: ["", "Price Tracker", "Облачные трекеры"],
   compareRows: [
-    ["Где хранится история цен", "В вашем браузере, на вашем устройстве", "На серверах сервиса"],
-    ["Аккаунт", "Не нужен", "Обычно нужен"],
+    ["История цен", "В браузере на вашем устройстве", "На серверах сервиса"],
+    ["Регистрация", "Не требуется", "Зависит от сервиса"],
     ["Резервная копия", "Экспорт и импорт JSON", "Зависит от сервиса"],
-    ["Магазины", "Ozon, Wildberries, Яндекс Маркет", "Зависит от сервиса"],
-    ["Синхронизация между устройствами", "Нет, историю переносят через JSON", "Обычно есть"],
+    ["Маркетплейсы", "Ozon, Wildberries, Яндекс Маркет, AliExpress Россия", "Зависит от сервиса"],
   ],
-  compareNote: "Общее сравнение. Возможности конкретных сервисов отличаются.",
+  compareNote: "Функция «Делиться ценами» по умолчанию выключена. Если её включить, расширение передаёт на сервер трекера название магазина, ID товара и публичную цену без карты.",
   faqKicker: "Перед установкой",
-  faqTitle: "Вопросы",
+  faqTitle: "Частые вопросы",
   faqCount: "вопросов",
   faqs: [
-    ["Как отслеживать цену товара на Ozon?", "Установите расширение из Chrome Web Store, откройте товар на Ozon и добавьте его в список отслеживания. Трекер записывает цену со временем и показывает историю на графике."],
-    ["Работает ли расширение с Wildberries и Яндекс Маркетом?", "Да. Price Tracker поддерживает Ozon, Wildberries и Яндекс Маркет."],
-    ["Можно ли получить уведомление о снижении цены?", "Да. Задайте целевую цену для товара, и трекер отметит момент, когда цена её достигнет."],
-    ["Где хранится история цен?", "В локальной базе вашего браузера, на вашем устройстве. Резервную копию JSON можно экспортировать и импортировать в любой момент."],
-    ["Нужен ли аккаунт?", "Нет. Расширение работает без аккаунта."],
-    ["В каких браузерах работает расширение?", "Оно создано для Google Chrome и устанавливается из Chrome Web Store."],
+    ["Когда появляется история цен на Ozon?", "Собственная история начинается с первой цены, сохранённой при добавлении товара. График появится, когда будет достаточно данных. Если включить «Делиться ценами», на графике может появиться история обычной цены, собранная другими пользователями."],
+    ["Обновляются ли цены при закрытом Chrome?", "Для фоновых проверок Chrome должен работать. Если браузер полностью закрыт, расширение не проверяет цены."],
+    ["Как посмотреть цену без Ozon Карты?", "В настройках расширения включите «Показывать обычную цену». Если для товара есть данные по обеим ценам, на графике появится линия «Без карты» рядом с линией «С Ozon Картой»."],
+    ["Нужна ли регистрация?", "Регистрация для работы с расширением не нужна."],
+    ["Какие ещё магазины поддерживаются?", "Price Tracker от Dey Intelligence также работает с Wildberries, Яндекс Маркетом и AliExpress Россия. Поддержка AliExpress включается отдельно в настройках."],
   ],
-  finalTitle: "Хватит проверять. Начните отслеживать.",
-  finalText: "Пусть цена сама придёт к вам, а вы будете знать, что именно изменилось.",
-  finalCta: "Получить Price Tracker",
-  allWork: "Все работы",
+  finalTitle: "Начните отслеживать цены на Ozon",
+  finalText: "Установите расширение и добавьте товар, за ценой которого хотите следить.",
+  finalCta: "Установить из Chrome Web Store",
+  allWork: "Все проекты",
   otherLangLabel: "Read in English",
   otherLangHref: "/ozon-price-tracker",
 };

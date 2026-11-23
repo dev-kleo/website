@@ -1,4 +1,5 @@
 /* Ozon Price Tracker page. Uses the homepage language: mono labels, orange dot, big tight type, dark band, ruled rows. Tokens: globals.css + redesign.css. */
+.op-shell { container-type: inline-size; }
 .op-page .section-bar { padding-bottom: clamp(24px, 3vw, 40px); }
 .op-page a:focus-visible, .op-page summary:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; border-radius: 4px; }
 .op-section { padding: clamp(64px, 9vw, 128px) 0 0; }
@@ -46,7 +47,8 @@
 .op-step p { max-width: 30rem; margin: 0; color: var(--text-muted); font-size: 1.05rem; line-height: 1.55; }
 
 /* Dark feature band, full bleed */
-.op-band { width: 100vw; margin: clamp(64px, 9vw, 128px) 0 0 calc(50% - 50vw); }
+.op-band { margin-top: clamp(64px, 9vw, 128px); }
+.op-page .op-band, .op-page .site-footer { width: 100cqw; margin-left: calc(50% - 50cqw); }
 .op-inner { max-width: 80rem; margin: 0 auto; }
 
 /* Russian block */
@@ -85,3 +87,7 @@
   .op-step { grid-template-columns: 1fr; gap: 10px; }
   .op-ru-grid { grid-template-columns: 1fr; }
 }
+
+.op-shared { display: contents; }
+.op-screenshot { text-align: center; }
+.op-screenshot img { display: block; width: min(100%, 420px); height: auto; margin: 0 auto; border-radius: 6px; }

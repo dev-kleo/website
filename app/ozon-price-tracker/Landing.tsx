@@ -1,18 +1,19 @@
+import Image from "next/image";
 import Link from "next/link";
 import { SiteFooter } from "../SiteFooter";
 import { SiteHeader } from "../SiteHeader";
 import { profile } from "../site-config";
-import type { Copy } from "./copy";
+import type { ChartCopy, Copy } from "./copy";
 import "./ozon-price-tracker.css";
 
-export const chromeWebStoreUrl = "https://chromewebstore.google.com/detail/ozon-price-tracker/dodppojnnlcmbjeenenmpalmiikkmfkh";
+export const chromeWebStoreUrl = "https://chromewebstore.google.com/detail/price-tracker-for-ozon-wi/dodppojnnlcmbjeenenmpalmiikkmfkh";
 
 function jsonLd(c: Copy) {
   const url = `${profile.siteUrl}${c.path}`;
   return {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": "SoftwareApplication", name: "Price Tracker for Ozon, Wildberries & Yandex Market", alternateName: "Ozon Price Tracker", applicationCategory: "BrowserApplication", operatingSystem: "Chrome", description: c.description, url, downloadUrl: chromeWebStoreUrl, inLanguage: c.lang, author: { "@type": "Person", name: profile.name, url: profile.siteUrl } },
+      { "@type": "SoftwareApplication", name: "Price Tracker for Ozon, Wildberries, Yandex Market & AliExpress", alternateName: c.lang === "ru" ? "Price Tracker от Dey Intelligence" : "Ozon Price Tracker", applicationCategory: "BrowserApplication", operatingSystem: "Chrome", description: c.description, url, downloadUrl: chromeWebStoreUrl, inLanguage: c.lang, publisher: { "@type": "Organization", name: profile.brand, url: profile.siteUrl }, author: { "@type": "Person", name: profile.name, url: profile.siteUrl } },
       { "@type": "BreadcrumbList", itemListElement: [
         { "@type": "ListItem", position: 1, name: c.lang === "ru" ? "Главная" : "Home", item: profile.siteUrl },
         { "@type": "ListItem", position: 2, name: c.lang === "ru" ? "Работы" : "Work", item: `${profile.siteUrl}/projects` },
@@ -23,7 +24,7 @@ function jsonLd(c: Copy) {
   };
 }
 
-function PriceChart({ c }: { c: Copy["chart"] }) {
+function PriceChart({ c }: { c: ChartCopy }) {
   return <figure className="op-tile">
     <div className="mono op-tile-top"><span>{c.top}</span><span className="op-tile-status"><span className="dot" aria-hidden="true" />{c.illustration}</span></div>
     <p className="op-product">{c.product}</p>
@@ -44,7 +45,7 @@ function PriceChart({ c }: { c: Copy["chart"] }) {
 }
 
 export function Landing({ c }: { c: Copy }) {
-  return <div className="site-shell op-shell" lang={c.lang}><a className="skip-link" href="#main-content">{c.lang === "ru" ? "Перейти к содержимому" : "Skip to content"}</a><SiteHeader active="work" />
+  return <div className="site-shell op-shell" lang={c.lang}><a className="skip-link" href="#main-content">{c.lang === "ru" ? "Перейти к содержимому" : "Skip to content"}</a><div className="op-shared" lang="en"><SiteHeader active="work" /></div>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(c)).replace(/</g, "\\u003c") }} />
     <main className="page-content op-page" id="main-content">
       <section className="op-hero" aria-labelledby="op-title">
@@ -55,7 +56,12 @@ export function Landing({ c }: { c: Copy }) {
         <ul className="mono op-facts">{c.facts.map((f) => <li key={f}>{f}</li>)}</ul>
       </section>
 
-      <PriceChart c={c.chart} />
+      {c.screenshot ? (
+        <figure className="op-tile op-screenshot">
+          <Image src="/images/ozon-price-tracker/price-history.png" width={420} height={600} alt={c.screenshot.alt} />
+          <figcaption className="mono op-note">{c.screenshot.caption}</figcaption>
+        </figure>
+      ) : <PriceChart c={c.chart} />}
 
       <section id="how-it-works" className="op-section" aria-labelledby="op-how">
         <div className="mono section-bar"><span>S.01</span><span>{c.stepsCount}</span></div>
@@ -90,7 +96,7 @@ export function Landing({ c }: { c: Copy }) {
         <p>{c.finalText}</p>
         <div className="op-actions"><a className="button button-primary" href={chromeWebStoreUrl} target="_blank" rel="noreferrer">{c.finalCta} <span aria-hidden="true">↗</span></a><Link className="text-action" href="/projects">{c.allWork} <span aria-hidden="true">→</span></Link><Link className="text-action" href={c.otherLangHref} hrefLang={c.lang === "ru" ? "en" : "ru"} lang={c.lang === "ru" ? "en" : "ru"}>{c.otherLangLabel} <span aria-hidden="true">→</span></Link></div>
       </section>
-      <SiteFooter />
+      <div className="op-shared" lang="en"><SiteFooter /></div>
     </main>
   </div>;
 }

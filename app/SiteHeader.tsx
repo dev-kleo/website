@@ -12,6 +12,7 @@ const GREETINGS = ["Dey Intelligence", "Hello", "नमस्ते", "নমস
 const MENU = [
   { href: "/#research", label: "Research", key: "research" },
   { href: "/#projects", label: "Projects", key: "projects" },
+  { href: "https://play.deyintelligence.com/", label: "Play", key: "play" },
   { href: "/#experience", label: "Experience", key: "experience" },
   { href: "/publications", label: "Publications", key: "publications" },
   { href: "/reading", label: "Reading", key: "reading" },
